@@ -7,9 +7,11 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from tools.create_manifest import get_orthographic_data
-# import torch
-# import torchaudio
-# from transformers import Wav2Vec2Processor, Wav2Vec2Model
+import torch
+import torchaudio
+from transformers import Wav2Vec2Processor, Wav2Vec2Model
+import torch.nn.functional as F
+import time
 
 
 class Manifest:
@@ -21,8 +23,57 @@ class Manifest:
         self.entries  = [m for m in manifest if m is not None]
         self.labels = np.array([m.diagnosis for m in self.entries])
 
-    def get_wav2vec2_embeddings(self):
+    def get_wav2vec2_embeddings(self,
+                                model_name = "wav2vec2-base",
+                                embeddings_folder = '/research/milsrg1/sld/exp-mf730/embeddings'):
+        
+        embedding_file = f'{model_name}_embeddings.pt'
+        path = f'{embeddings_folder}/{embedding_file}'
+        if os.path.exists(path):
+            embeddings = torch.load(path,weights_only=True)
+        else:
+            model_id = f'facebook/{model_name}'
 
+            print(f'\nloading {model_id}')
+            processor = Wav2Vec2Processor.from_pretrained(model_id)
+            model = Wav2Vec2Model.from_pretrained(model_id)
+
+            embeddings = []
+            for entry in self.entries[:20]:
+                print(f'\nprocessing entry {entry.name}')
+
+                embeddings_list = []
+                i = 0
+                for segment in entry.child_segments[:20]:
+                    print(f'processing segment {i:04}/{len(entry.child_segments):04}...',end='\r')
+                    i += 1
+                    
+                    input = processor(segment, return_tensors="pt", sampling_rate=entry.sample_rate).input_values # (1, num_samples)
+                    
+                    samples = input.shape[1]
+                    min_samples = 512 
+                    if samples < min_samples:
+                        padding = min_samples - samples
+                        input = F.pad(input,(0,padding))
+
+                    with torch.no_grad():
+                        output = model(input)
+
+                    output_embeddings = output.last_hidden_state
+
+                    embeddings_list.append(output_embeddings)
+
+                if len(embeddings_list) < 2:
+                    print('ERROR: no embeddings')
+                    raise ValueError
+                
+                concatenated_embeddings = torch.cat(embeddings_list,dim = 1)
+
+                embeddings.append(concatenated_embeddings)
+
+            torch.save(embeddings,path)
+
+        return embeddings
 
 @dataclass
 class ManifestEntry:
@@ -92,5 +143,5 @@ class ManifestEntry:
 
 
 if __name__ == "__main__":
-    print(Manifest().labels)
+    Manifest().get_wav2vec2_embeddings()
     
