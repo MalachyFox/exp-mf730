@@ -85,11 +85,11 @@ def collate_data(file_path: str,mapping_dict: dict,diagnosis_dict: dict,orthogra
 
 
 if __name__ == "__main__":
-    audio_data_path = "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/"
+    audio_data_path = "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz"
     mapping_data_path = "/data/milsrg1/corpora/splash/convert/lib/diagnosis/mapping.txt"
     diagnosis_data_path = "/data/milsrg1/corpora/splash/convert/lib/diagnosis/diagnosis.json"
-    orthographic_path = "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/"
-    output_file = '/research/milsrg1/exp-mf730/manifest.json' # current parent folder
+    orthographic_path = "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp"
+    output_file = '/research/milsrg1/sld/exp-mf730/manifest.json' # current parent folder
 
     file_paths = get_filepaths(audio_data_path)
     mapping_dict = get_mapping(mapping_data_path)
