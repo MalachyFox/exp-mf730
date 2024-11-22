@@ -92,7 +92,7 @@ if __name__ == "__main__":
 
     
     plt.figure()
-    plt.hist(durs,bins=20)  
+    plt.hist(durs,bins=50)  
     plt.title('Histogram of durations of utterances of continuous child speech')
     plt.xlabel('Duration of section (s)')
     plt.ylabel('Count')
