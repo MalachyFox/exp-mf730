@@ -1,0 +1,1462 @@
+[
+    {
+        "name": "sfs_010414_280119_master_1",
+        "name_internal": "CSP011-X0414-28012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010414_280119_master_1.wav",
+        "file_size": 4231724,
+        "sample_rate": 16000,
+        "duration": 132.24,
+        "num_channels": 1,
+        "num_samples": 2115840,
+        "diagnosis": null,
+        "diagnosis_data": null
+    },
+    {
+        "name": "sfs_040211_290419_master_1",
+        "name_internal": "CSP04R-X0211-29042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040211_290419_master_1.wav",
+        "file_size": 31845932,
+        "sample_rate": 16000,
+        "duration": 995.184,
+        "num_channels": 1,
+        "num_samples": 15922944,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP04R-X0211-29042019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010327_071218_master_1",
+        "name_internal": "CSP01R-X0327-07122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010327_071218_master_1.wav",
+        "file_size": 27726380,
+        "sample_rate": 16000,
+        "duration": 866.448,
+        "num_channels": 1,
+        "num_samples": 13863168,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0327-07122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010409_290119_master_1",
+        "name_internal": "CSP011-X0409-29012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010409_290119_master_1.wav",
+        "file_size": 20414252,
+        "sample_rate": 16000,
+        "duration": 637.944,
+        "num_channels": 1,
+        "num_samples": 10207104,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0409-29012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030116_200319_master_1",
+        "name_internal": "CSP03R-X0116-20032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030116_200319_master_1.wav",
+        "file_size": 23636012,
+        "sample_rate": 16000,
+        "duration": 738.624,
+        "num_channels": 1,
+        "num_samples": 11817984,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            false,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0116-20032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010109_061218_master_1",
+        "name_internal": "CSP01R-X0109-06122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010109_061218_master_1.wav",
+        "file_size": 24307244,
+        "sample_rate": 16000,
+        "duration": 759.6,
+        "num_channels": 1,
+        "num_samples": 12153600,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0109-06122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030214_220319_master_1",
+        "name_internal": "CSP031-X0214-22032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030214_220319_master_1.wav",
+        "file_size": 20580140,
+        "sample_rate": 16000,
+        "duration": 643.128,
+        "num_channels": 1,
+        "num_samples": 10290048,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP031-X0214-22032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010413_290119_master_1",
+        "name_internal": "CSP011-X0413-29012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010413_290119_master_1.wav",
+        "file_size": 23798060,
+        "sample_rate": 16000,
+        "duration": 743.688,
+        "num_channels": 1,
+        "num_samples": 11899008,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0413-29012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010103_031218_master_1",
+        "name_internal": "CSP01R-X0103-03122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010103_031218_master_1.wav",
+        "file_size": 23157548,
+        "sample_rate": 16000,
+        "duration": 723.672,
+        "num_channels": 1,
+        "num_samples": 11578752,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0103-03122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010126_131218_master_1",
+        "name_internal": "CSP01R-X0126-13122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010126_131218_master_1.wav",
+        "file_size": 32540972,
+        "sample_rate": 16000,
+        "duration": 1016.904,
+        "num_channels": 1,
+        "num_samples": 16270464,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0126-13122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020201_120219_master_1",
+        "name_internal": "CSP02R-X0201-12022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020201_120219_master_1.wav",
+        "file_size": 24411692,
+        "sample_rate": 16000,
+        "duration": 762.864,
+        "num_channels": 1,
+        "num_samples": 12205824,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP02R-X0201-12022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030130_210319_master_1",
+        "name_internal": "CSP03R-X0130-21032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030130_210319_master_1.wav",
+        "file_size": 26290220,
+        "sample_rate": 16000,
+        "duration": 821.568,
+        "num_channels": 1,
+        "num_samples": 13145088,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0130-21032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010211_071218_master_1",
+        "name_internal": "CSP01R-X0211-07122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010211_071218_master_1.wav",
+        "file_size": 19936556,
+        "sample_rate": 16000,
+        "duration": 623.016,
+        "num_channels": 1,
+        "num_samples": 9968256,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0211-07122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030108_190319_master_1",
+        "name_internal": "CSP03R-X0108-19032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030108_190319_master_1.wav",
+        "file_size": 23413292,
+        "sample_rate": 16000,
+        "duration": 731.664,
+        "num_channels": 1,
+        "num_samples": 11706624,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0108-19032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010610_310119_master_1",
+        "name_internal": "CSP011-X0610-31012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010610_310119_master_1.wav",
+        "file_size": 26122028,
+        "sample_rate": 16000,
+        "duration": 816.312,
+        "num_channels": 1,
+        "num_samples": 13060992,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0610-31012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010216_121218_master_1",
+        "name_internal": "CSP01R-X0216-12122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010216_121218_master_1.wav",
+        "file_size": 27558188,
+        "sample_rate": 16000,
+        "duration": 861.192,
+        "num_channels": 1,
+        "num_samples": 13779072,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0216-12122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020403_260219_BU_1",
+        "name_internal": "CSP021-X0403-26022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020403_260219_BU_1.wav",
+        "file_size": 21510956,
+        "sample_rate": 16000,
+        "duration": 672.216,
+        "num_channels": 1,
+        "num_samples": 10755456,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP021-X0403-26022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010606_290119_master_1",
+        "name_internal": "CSP011-X0606-29012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010606_290119_master_1.wav",
+        "file_size": 27043628,
+        "sample_rate": 16000,
+        "duration": 845.112,
+        "num_channels": 1,
+        "num_samples": 13521792,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0606-29012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010128_131218_master_1",
+        "name_internal": "CSP01R-X0128-13122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010128_131218_master_1.wav",
+        "file_size": 21326636,
+        "sample_rate": 16000,
+        "duration": 666.456,
+        "num_channels": 1,
+        "num_samples": 10663296,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0128-13122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_050304_220519_master_1",
+        "name_internal": "CSP051-X0304-22052019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_050304_220519_master_1.wav",
+        "file_size": 18095660,
+        "sample_rate": 16000,
+        "duration": 565.488,
+        "num_channels": 1,
+        "num_samples": 9047808,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP051-X0304-22052019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020215_120219_master_1",
+        "name_internal": "CSP02R-X0215-12022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020215_120219_master_1.wav",
+        "file_size": 28724780,
+        "sample_rate": 16000,
+        "duration": 897.648,
+        "num_channels": 1,
+        "num_samples": 14362368,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP02R-X0215-12022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020208_120219_master_1",
+        "name_internal": "CSP02R-X0208-12022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020208_120219_master_1.wav",
+        "file_size": 18554924,
+        "sample_rate": 16000,
+        "duration": 579.84,
+        "num_channels": 1,
+        "num_samples": 9277440,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP02R-X0208-12022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_040116_250419_master_1",
+        "name_internal": "CSP04R-X0116-25042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040116_250419_master_1.wav",
+        "file_size": 40789292,
+        "sample_rate": 16000,
+        "duration": 1274.664,
+        "num_channels": 1,
+        "num_samples": 20394624,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP04R-X0116-25042019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030213_260319_master_1",
+        "name_internal": "CSP031-X0213-26032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030213_260319_master_1.wav",
+        "file_size": 21962540,
+        "sample_rate": 16000,
+        "duration": 686.328,
+        "num_channels": 1,
+        "num_samples": 10981248,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP031-X0213-26032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010617_010219_master_1",
+        "name_internal": "CSP011-X0617-01022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010617_010219_master_1.wav",
+        "file_size": 24508460,
+        "sample_rate": 16000,
+        "duration": 765.888,
+        "num_channels": 1,
+        "num_samples": 12254208,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0617-01022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030115_200319_master_1",
+        "name_internal": "CSP03R-X0115-20032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030115_200319_master_1.wav",
+        "file_size": 26543660,
+        "sample_rate": 16000,
+        "duration": 829.488,
+        "num_channels": 1,
+        "num_samples": 13271808,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0115-20032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010518_310119_master_1",
+        "name_internal": "CSP011-X0518-31012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010518_310119_master_1.wav",
+        "file_size": 19421996,
+        "sample_rate": 16000,
+        "duration": 606.936,
+        "num_channels": 1,
+        "num_samples": 9710976,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0518-31012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030123_190319_master_1",
+        "name_internal": "CSP03R-X0123-19032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030123_190319_master_1.wav",
+        "file_size": 28709420,
+        "sample_rate": 16000,
+        "duration": 897.168,
+        "num_channels": 1,
+        "num_samples": 14354688,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0123-19032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010117_131218_master_1",
+        "name_internal": "CSP01R-X0117-13122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010117_131218_master_1.wav",
+        "file_size": 29271596,
+        "sample_rate": 16000,
+        "duration": 914.736,
+        "num_channels": 1,
+        "num_samples": 14635776,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0117-13122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030210_220319_master_1",
+        "name_internal": "CSP031-X0210-22032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030210_220319_master_1.wav",
+        "file_size": 27938348,
+        "sample_rate": 16000,
+        "duration": 873.072,
+        "num_channels": 1,
+        "num_samples": 13969152,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP031-X0210-22032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010505_300119_master_1",
+        "name_internal": "CSP011-X0505-30012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010505_300119_master_1.wav",
+        "file_size": 20492588,
+        "sample_rate": 16000,
+        "duration": 640.392,
+        "num_channels": 1,
+        "num_samples": 10246272,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0505-30012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010516_310119_master_1",
+        "name_internal": "CSP011-X0516-31012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010516_310119_master_1.wav",
+        "file_size": 23192108,
+        "sample_rate": 16000,
+        "duration": 724.752,
+        "num_channels": 1,
+        "num_samples": 11596032,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0516-31012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_040208_290419_master_1",
+        "name_internal": "CSP04R-X0208-29042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040208_290419_master_1.wav",
+        "file_size": 29272364,
+        "sample_rate": 16000,
+        "duration": 914.76,
+        "num_channels": 1,
+        "num_samples": 14636160,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP04R-X0208-29042019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020122_140219_master_1",
+        "name_internal": "CSP02R-X0122-14022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020122_140219_master_1.wav",
+        "file_size": 21967148,
+        "sample_rate": 16000,
+        "duration": 686.472,
+        "num_channels": 1,
+        "num_samples": 10983552,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP02R-X0122-14022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020114_130219_master_1",
+        "name_internal": "CSP02R-X0114-13022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020114_130219_master_1.wav",
+        "file_size": 26204972,
+        "sample_rate": 16000,
+        "duration": 818.904,
+        "num_channels": 1,
+        "num_samples": 13102464,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP02R-X0114-13022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010119_131218_master_1",
+        "name_internal": "CSP01R-X0119-13122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010119_131218_master_1.wav",
+        "file_size": 21259052,
+        "sample_rate": 16000,
+        "duration": 664.344,
+        "num_channels": 1,
+        "num_samples": 10629504,
+        "diagnosis": null,
+        "diagnosis_data": null
+    },
+    {
+        "name": "sfs_040212_290419_master_1",
+        "name_internal": "CSP04R-X0212-29042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040212_290419_master_1.wav",
+        "file_size": 26946860,
+        "sample_rate": 16000,
+        "duration": 842.088,
+        "num_channels": 1,
+        "num_samples": 13473408,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP04R-X0212-29042019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010511_310119_master_1",
+        "name_internal": "CSP011-X0511-31012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010511_310119_master_1.wav",
+        "file_size": 23017004,
+        "sample_rate": 16000,
+        "duration": 719.28,
+        "num_channels": 1,
+        "num_samples": 11508480,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0511-31012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010613_300119_master_1",
+        "name_internal": "CSP011-X0613-30012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010613_300119_master_1.wav",
+        "file_size": 25504556,
+        "sample_rate": 16000,
+        "duration": 797.016,
+        "num_channels": 1,
+        "num_samples": 12752256,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0613-30012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_050310_050619_master_1",
+        "name_internal": "CSP051-X0310-05062019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_050310_050619_master_1.wav",
+        "file_size": 26540588,
+        "sample_rate": 16000,
+        "duration": 829.392,
+        "num_channels": 1,
+        "num_samples": 13270272,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP051-X0310-05062019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_040120_260419_master_1",
+        "name_internal": "CSP04R-X0120-26042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040120_260419_master_1.wav",
+        "file_size": 28724780,
+        "sample_rate": 16000,
+        "duration": 897.648,
+        "num_channels": 1,
+        "num_samples": 14362368,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP04R-X0120-26042019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020202_130219_master_1",
+        "name_internal": "CSP02R-X0202-13022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020202_130219_master_1.wav",
+        "file_size": 23013932,
+        "sample_rate": 16000,
+        "duration": 719.184,
+        "num_channels": 1,
+        "num_samples": 11506944,
+        "diagnosis": null,
+        "diagnosis_data": null
+    },
+    {
+        "name": "sfs_040101_240419_master_1",
+        "name_internal": "CSP04R-X0101-24042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040101_240419_master_1.wav",
+        "file_size": 25797932,
+        "sample_rate": 16000,
+        "duration": 806.184,
+        "num_channels": 1,
+        "num_samples": 12898944,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP04R-X0101-24042019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010311_071218_master_1",
+        "name_internal": "CSP01R-X0311-07122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010311_071218_master_1.wav",
+        "file_size": 31677740,
+        "sample_rate": 16000,
+        "duration": 989.928,
+        "num_channels": 1,
+        "num_samples": 15838848,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0311-07122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030225_220319_master_1",
+        "name_internal": "CSP031-X0225-22032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030225_220319_master_1.wav",
+        "file_size": 23883308,
+        "sample_rate": 16000,
+        "duration": 746.352,
+        "num_channels": 1,
+        "num_samples": 11941632,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP031-X0225-22032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010602_280119_master_1",
+        "name_internal": "CSP011-X0602-28012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010602_280119_master_1.wav",
+        "file_size": 20322092,
+        "sample_rate": 16000,
+        "duration": 635.064,
+        "num_channels": 1,
+        "num_samples": 10161024,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0602-28012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030111_190319_master_1",
+        "name_internal": "CSP03R-X0111-19032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030111_190319_master_1.wav",
+        "file_size": 27119660,
+        "sample_rate": 16000,
+        "duration": 847.488,
+        "num_channels": 1,
+        "num_samples": 13559808,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0111-19032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010306_031218_master_1",
+        "name_internal": "CSP01R-X0306-03122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010306_031218_master_1.wav",
+        "file_size": 22553132,
+        "sample_rate": 16000,
+        "duration": 704.784,
+        "num_channels": 1,
+        "num_samples": 11276544,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0306-03122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010611_300119_master_1",
+        "name_internal": "CSP011-X0611-30012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010611_300119_master_1.wav",
+        "file_size": 22172204,
+        "sample_rate": 16000,
+        "duration": 692.88,
+        "num_channels": 1,
+        "num_samples": 11086080,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0611-30012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010219_121218_master_1",
+        "name_internal": "CSP01R-X0219-12122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010219_121218_master_1.wav",
+        "file_size": 23960108,
+        "sample_rate": 16000,
+        "duration": 748.752,
+        "num_channels": 1,
+        "num_samples": 11980032,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0219-12122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010307_061218_master_1",
+        "name_internal": "CSP01R-X0307-06122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010307_061218_master_1.wav",
+        "file_size": 19293740,
+        "sample_rate": 16000,
+        "duration": 602.928,
+        "num_channels": 1,
+        "num_samples": 9646848,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0307-06122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030201_210319_master_1",
+        "name_internal": "CSP031-X0201-21032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030201_210319_master_1.wav",
+        "file_size": 23283500,
+        "sample_rate": 16000,
+        "duration": 727.608,
+        "num_channels": 1,
+        "num_samples": 11641728,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP031-X0201-21032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010313_071218_master_1",
+        "name_internal": "CSP01R-X0313-07122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010313_071218_master_1.wav",
+        "file_size": 26757164,
+        "sample_rate": 16000,
+        "duration": 836.16,
+        "num_channels": 1,
+        "num_samples": 13378560,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0313-07122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020207_120219_master_1",
+        "name_internal": "CSP02R-X0207-12022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020207_120219_master_1.wav",
+        "file_size": 22077740,
+        "sample_rate": 16000,
+        "duration": 689.928,
+        "num_channels": 1,
+        "num_samples": 11038848,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP02R-X0207-12022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020311_150219_BU_1",
+        "name_internal": "CSP021-X0311-15022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020311_150219_BU_1.wav",
+        "file_size": 17382956,
+        "sample_rate": 16000,
+        "duration": 543.216,
+        "num_channels": 1,
+        "num_samples": 8691456,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP021-X0311-15022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010108_051218_master_1",
+        "name_internal": "CSP01R-X0108-05122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010108_051218_master_1.wav",
+        "file_size": 30209324,
+        "sample_rate": 16000,
+        "duration": 944.04,
+        "num_channels": 1,
+        "num_samples": 15104640,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0108-05122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010120_061218_master_1",
+        "name_internal": "CSP01R-X0120-06122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010120_061218_master_1.wav",
+        "file_size": 19746860,
+        "sample_rate": 16000,
+        "duration": 617.088,
+        "num_channels": 1,
+        "num_samples": 9873408,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0120-06122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010404_040219_master_1",
+        "name_internal": "CSP011-X0404-04022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010404_040219_master_1.wav",
+        "file_size": 26936876,
+        "sample_rate": 16000,
+        "duration": 841.776,
+        "num_channels": 1,
+        "num_samples": 13468416,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0404-04022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030122_200319_master_1",
+        "name_internal": "CSP03R-X0122-20032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030122_200319_master_1.wav",
+        "file_size": 29943596,
+        "sample_rate": 16000,
+        "duration": 935.736,
+        "num_channels": 1,
+        "num_samples": 14971776,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0122-20032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030211_260319_master_1",
+        "name_internal": "CSP031-X0211-26032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030211_260319_master_1.wav",
+        "file_size": 24132908,
+        "sample_rate": 16000,
+        "duration": 754.152,
+        "num_channels": 1,
+        "num_samples": 12066432,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP031-X0211-26032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030117_200319_master_1",
+        "name_internal": "CSP03R-X0117-20032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030117_200319_master_1.wav",
+        "file_size": 25599788,
+        "sample_rate": 16000,
+        "duration": 799.992,
+        "num_channels": 1,
+        "num_samples": 12799872,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0117-20032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010102_031218_master_1",
+        "name_internal": "CSP01R-X0102-03122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010102_031218_master_1.wav",
+        "file_size": 28045100,
+        "sample_rate": 16000,
+        "duration": 876.408,
+        "num_channels": 1,
+        "num_samples": 14022528,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0102-03122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010112_061218_master_1",
+        "name_internal": "CSP01R-X0112-06122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010112_061218_master_1.wav",
+        "file_size": 28375340,
+        "sample_rate": 16000,
+        "duration": 886.728,
+        "num_channels": 1,
+        "num_samples": 14187648,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0112-06122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_040127_290419_master_1",
+        "name_internal": "CSP04R-X0127-29042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040127_290419_master_1.wav",
+        "file_size": 26914604,
+        "sample_rate": 16000,
+        "duration": 841.08,
+        "num_channels": 1,
+        "num_samples": 13457280,
+        "diagnosis": null,
+        "diagnosis_data": null
+    },
+    {
+        "name": "sfs_030110_200319_master_1",
+        "name_internal": "CSP03R-X0110-20032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030110_200319_master_1.wav",
+        "file_size": 25455404,
+        "sample_rate": 16000,
+        "duration": 795.48,
+        "num_channels": 1,
+        "num_samples": 12727680,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0110-20032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010401_290119_master_1",
+        "name_internal": "CSP011-X0401-29012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010401_290119_master_1.wav",
+        "file_size": 21547052,
+        "sample_rate": 16000,
+        "duration": 673.344,
+        "num_channels": 1,
+        "num_samples": 10773504,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0401-29012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020425_280219_BU_1",
+        "name_internal": "CSP021-X0425-28022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020425_280219_BU_1.wav",
+        "file_size": 28111148,
+        "sample_rate": 16000,
+        "duration": 878.472,
+        "num_channels": 1,
+        "num_samples": 14055552,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP021-X0425-28022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_040210_290419_master_1",
+        "name_internal": "CSP04R-X0210-29042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040210_290419_master_1.wav",
+        "file_size": 28280876,
+        "sample_rate": 16000,
+        "duration": 883.776,
+        "num_channels": 1,
+        "num_samples": 14140416,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP04R-X0210-29042019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_040117_260419_master_1",
+        "name_internal": "CSP04R-X0117-26042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040117_260419_master_1.wav",
+        "file_size": 34123052,
+        "sample_rate": 16000,
+        "duration": 1066.344,
+        "num_channels": 1,
+        "num_samples": 17061504,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP04R-X0117-26042019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010116_051218_master_1",
+        "name_internal": "CSP01R-X0116-05122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010116_051218_master_1.wav",
+        "file_size": 23872556,
+        "sample_rate": 16000,
+        "duration": 746.016,
+        "num_channels": 1,
+        "num_samples": 11936256,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0116-05122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020327_250219_BU_1",
+        "name_internal": "CSP021-X0327-25022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020327_250219_BU_1.wav",
+        "file_size": 30121004,
+        "sample_rate": 16000,
+        "duration": 941.28,
+        "num_channels": 1,
+        "num_samples": 15060480,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP021-X0327-25022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010213_071218_master_1",
+        "name_internal": "CSP01R-X0213-07122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010213_071218_master_1.wav",
+        "file_size": 22340396,
+        "sample_rate": 16000,
+        "duration": 698.136,
+        "num_channels": 1,
+        "num_samples": 11170176,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0213-07122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030128_210319_master_1",
+        "name_internal": "CSP03R-X0128-21032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030128_210319_master_1.wav",
+        "file_size": 24675116,
+        "sample_rate": 16000,
+        "duration": 771.096,
+        "num_channels": 1,
+        "num_samples": 12337536,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0128-21032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010105_051218_master_1",
+        "name_internal": "CSP01R-X0105-05122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010105_051218_master_1.wav",
+        "file_size": 26077484,
+        "sample_rate": 16000,
+        "duration": 814.92,
+        "num_channels": 1,
+        "num_samples": 13038720,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0105-05122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010322_111218_master_1",
+        "name_internal": "CSP01R-X0322-11122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010322_111218_master_1.wav",
+        "file_size": 28436780,
+        "sample_rate": 16000,
+        "duration": 888.648,
+        "num_channels": 1,
+        "num_samples": 14218368,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0322-11122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010314_031218_master_1",
+        "name_internal": "CSP01R-X0314-03122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010314_031218_master_1.wav",
+        "file_size": 20322092,
+        "sample_rate": 16000,
+        "duration": 635.064,
+        "num_channels": 1,
+        "num_samples": 10161024,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0314-03122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010317_121218_master_1",
+        "name_internal": "CSP01R-X0317-12122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010317_121218_master_1.wav",
+        "file_size": 15648812,
+        "sample_rate": 16000,
+        "duration": 489.024,
+        "num_channels": 1,
+        "num_samples": 7824384,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0317-12122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_050301_220519_master_1",
+        "name_internal": "CSP051-X0301-22052019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_050301_220519_master_1.wav",
+        "file_size": 18652460,
+        "sample_rate": 16000,
+        "duration": 582.888,
+        "num_channels": 1,
+        "num_samples": 9326208,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP051-X0301-22052019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030218_210319_master_1",
+        "name_internal": "CSP031-X0218-21032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030218_210319_master_1.wav",
+        "file_size": 23284268,
+        "sample_rate": 16000,
+        "duration": 727.632,
+        "num_channels": 1,
+        "num_samples": 11642112,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP031-X0218-21032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010509_010219_master_1",
+        "name_internal": "CSP011-X0509-01022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010509_010219_master_1.wav",
+        "file_size": 27387692,
+        "sample_rate": 16000,
+        "duration": 855.864,
+        "num_channels": 1,
+        "num_samples": 13693824,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0509-01022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010603_290119_master_1",
+        "name_internal": "CSP011-X0603-29012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010603_290119_master_1.wav",
+        "file_size": 21671468,
+        "sample_rate": 16000,
+        "duration": 677.232,
+        "num_channels": 1,
+        "num_samples": 10835712,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0603-29012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020219_130219_master_1",
+        "name_internal": "CSP02R-X0219-13022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020219_130219_master_1.wav",
+        "file_size": 20299820,
+        "sample_rate": 16000,
+        "duration": 634.368,
+        "num_channels": 1,
+        "num_samples": 10149888,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP02R-X0219-13022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020111_140219_master_1",
+        "name_internal": "CSP02R-X0111-14022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020111_140219_master_1.wav",
+        "file_size": 21583148,
+        "sample_rate": 16000,
+        "duration": 674.472,
+        "num_channels": 1,
+        "num_samples": 10791552,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP02R-X0111-14022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_040109_250419_master_1",
+        "name_internal": "CSP04R-X0109-25042019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_040109_250419_master_1.wav",
+        "file_size": 26327852,
+        "sample_rate": 16000,
+        "duration": 822.744,
+        "num_channels": 1,
+        "num_samples": 13163904,
+        "diagnosis": 0.5,
+        "diagnosis_data": [
+            true,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP04R-X0109-25042019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_030202_210319_master_1",
+        "name_internal": "CSP031-X0202-21032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030202_210319_master_1.wav",
+        "file_size": 22476332,
+        "sample_rate": 16000,
+        "duration": 702.384,
+        "num_channels": 1,
+        "num_samples": 11238144,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP031-X0202-21032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010513_010219_master_1",
+        "name_internal": "CSP011-X0513-01022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010513_010219_master_1.wav",
+        "file_size": 17432876,
+        "sample_rate": 16000,
+        "duration": 544.776,
+        "num_channels": 1,
+        "num_samples": 8716416,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0513-01022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010414_280119_master_2",
+        "name_internal": "CSP011-X0414-28012019-X2XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010414_280119_master_2.wav",
+        "file_size": 20589356,
+        "sample_rate": 16000,
+        "duration": 643.416,
+        "num_channels": 1,
+        "num_samples": 10294656,
+        "diagnosis": null,
+        "diagnosis_data": null
+    },
+    {
+        "name": "sfs_010303_051218_master_1",
+        "name_internal": "CSP01R-X0303-05122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010303_051218_master_1.wav",
+        "file_size": 25771052,
+        "sample_rate": 16000,
+        "duration": 805.344,
+        "num_channels": 1,
+        "num_samples": 12885504,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP01R-X0303-05122018-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_020312_150219_BU_1",
+        "name_internal": "CSP021-X0312-15022019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_020312_150219_BU_1.wav",
+        "file_size": 15809324,
+        "sample_rate": 16000,
+        "duration": 494.04,
+        "num_channels": 1,
+        "num_samples": 7904640,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP021-X0312-15022019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010106_031218_master_1",
+        "name_internal": "CSP01R-X0106-03122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010106_031218_master_1.wav",
+        "file_size": 29440556,
+        "sample_rate": 16000,
+        "duration": 920.016,
+        "num_channels": 1,
+        "num_samples": 14720256,
+        "diagnosis": null,
+        "diagnosis_data": null
+    },
+    {
+        "name": "sfs_030114_200319_master_1",
+        "name_internal": "CSP03R-X0114-20032019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_030114_200319_master_1.wav",
+        "file_size": 26120492,
+        "sample_rate": 16000,
+        "duration": 816.264,
+        "num_channels": 1,
+        "num_samples": 13060224,
+        "diagnosis": 0.0,
+        "diagnosis_data": [
+            false,
+            false
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP03R-X0114-20032019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010504_310119_master_1",
+        "name_internal": "CSP011-X0504-31012019-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010504_310119_master_1.wav",
+        "file_size": 22661420,
+        "sample_rate": 16000,
+        "duration": 708.168,
+        "num_channels": 1,
+        "num_samples": 11330688,
+        "diagnosis": 1.0,
+        "diagnosis_data": [
+            true,
+            true
+        ],
+        "orthographic_path": "/home/mifs/mf730/splash/SPLSHall01/orthographic_hp/CSP011-X0504-31012019-X1XXXX-en.txt"
+    },
+    {
+        "name": "sfs_010101_031218_master_1",
+        "name_internal": "CSP01R-X0101-03122018-X1XXXX-en",
+        "file_path": "/data/milsrg1/corpora/splash/SPLSHall01/audio_16kHz/sfs_010101_031218_master_1.wav",
+        "file_size": 29266988,
+        "sample_rate": 16000,
+        "duration": 914.592,
+        "num_channels": 1,
+        "num_samples": 14633472,
+        "diagnosis": null,
+        "diagnosis_data": null
+    }
+]
