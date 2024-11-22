@@ -11,3 +11,4 @@ labels = data.labels
 
 if len(embeddings) != len(labels):
     raise ValueError
+
