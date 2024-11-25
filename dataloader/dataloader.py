@@ -20,40 +20,34 @@ class Manifest:
             manifest = json.load(f)
         
         manifest  = [ManifestEntry.from_json(m) for m in manifest]
-        
         self.entries  = [m for m in manifest if m is not None]
-        self.labels = np.array([m.diagnosis for m in self.entries])
+        self.labels = [m.diagnosis for m in self.entries]
         self.manifest_path = manifest_path
 
     def get_wav2vec2_embeddings(self, model_name = "wav2vec2-base", embeddings_folder = '/research/milsrg1/sld/exp-mf730/embeddings'):
-        
-        print(f'\ngenerating embeddings for {self.manifest_path} using {model_name} and saving to {embeddings_folder}\n')
-        
         embedding_file = f'{model_name}_embeddings.pt'
         path = f'{embeddings_folder}/{embedding_file}'
         if os.path.exists(path):
+            print(f'\nLoading embeddings for {self.manifest_path} from {path}\n')
             embeddings = torch.load(path,weights_only=True)
         else:
+            print(f'\ngenerating embeddings for {self.manifest_path} using {model_name} and saving to {embeddings_folder}\n')
             model_id = f'facebook/{model_name}'
-
-            print(f'\nloading {model_id}')
             processor = Wav2Vec2Processor.from_pretrained(model_id)
             model = Wav2Vec2Model.from_pretrained(model_id)
 
             embeddings = []
             for entry in self.entries:
                 print(f'\nprocessing entry {entry.name}')
-
                 embeddings_list = []
                 i = 0
                 for segment in entry.child_segments:
                     print(f'processing segment {i:04}/{len(entry.child_segments):04}...',end='\r')
                     i += 1
-                    
+            
                     input = processor(segment, return_tensors="pt", sampling_rate=entry.sample_rate).input_values # (1, num_samples)
                     
                     samples = input.shape[1]
-                    #print(f'num samples: {samples}')
                     min_samples = 512 
                     if samples < min_samples:
                         padding = min_samples - samples
@@ -61,9 +55,7 @@ class Manifest:
 
                     with torch.no_grad():
                         output = model(input)
-
                     output_embeddings = output.last_hidden_state
-                    #print(f'output size {output_embeddings.shape}')
                     embeddings_list.append(output_embeddings)
 
                 if len(embeddings_list) < 2:
@@ -71,9 +63,8 @@ class Manifest:
                     raise ValueError
                 
                 concatenated_embeddings = torch.cat(embeddings_list,dim = 1)
-
                 embeddings.append(concatenated_embeddings)
-
+                
             torch.save(embeddings,path)
 
         return embeddings
