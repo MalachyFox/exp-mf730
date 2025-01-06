@@ -36,7 +36,13 @@ def analyse_table(table):
     return analysis
 
 if __name__ == '__main__':
+
+
+    output = ""
     results_name = 'test2_2' # not including results_
+
+
+
     output_folder = f'./results/{results_name}/'
     os.makedirs(output_folder, exist_ok=True)
     with open(f'{output_folder}/results.json','r') as f:
@@ -51,6 +57,7 @@ if __name__ == '__main__':
     for fold in results:
         labels = fold['result']['labels']
         preds = fold['result']['preds']
+        ids = fold['result']['ids']
         losses = fold['losses']
         for label, pred in zip(labels,preds):
             if label == 0:
@@ -59,18 +66,31 @@ if __name__ == '__main__':
                 c05.append(pred)
             if label == 1.0:
                 c10.append(pred)
-        print(labels,preds)
+        print(f'\nFold: {fold["fold"] + 1}')
+        for i in range(len(labels)):
+            print(ids[i],preds[i],labels[i])
+        #print(labels,preds)
         plt.plot(losses)
-        print(fold["fold"])
+        
         table = generate_table(labels, preds)
         analysis = analyse_table(table)
         balanced_accuracies.append(analysis['balanced_accuracy'])
         sensitivities.append(analysis['sensitivity'])
         specificities.append(analysis['specificity'])
-        print(analysis)
-    print(np.mean(balanced_accuracies))
-    print(np.mean(sensitivities))
-    print(np.mean(specificities))
+
+        for key, value in analysis.items():
+            print(f"{key}: {value}")
+    
+    combined_analysis = {   'balanced accuracy': np.mean(balanced_accuracies),
+                            'sensitivity': np.mean(sensitivities),
+                            'specificity': np.mean(specificities)}
+    print()
+    for key, value in combined_analysis.items():
+        print(f"{key}: {value}")
+
+    with open(f'{output_folder}/analysis.txt', "w") as f:
+        json.dump(combined_analysis, f, indent=4)
+        
     plt.savefig(f'{output_folder}/losses.png')
     plt.close()
     lens = np.array([len(c00),len(c05),len(c10)])
