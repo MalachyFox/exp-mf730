@@ -24,6 +24,7 @@ class Manifest:
         self.entries  = [m for m in manifest if m is not None]
         self.labels = [m.diagnosis for m in self.entries]
         self.manifest_path = manifest_path
+        self.ids = [m.name for m in self.entries]
 
     def get_wav2vec2_embeddings(self, model_name = "wav2vec2-base", embeddings_folder = '/research/milsrg1/sld/exp-mf730/embeddings'):
         embedding_file = f'{model_name}_embeddings.pt'
@@ -71,7 +72,7 @@ class Manifest:
         return embeddings
 
     def get_k(self,i,k):
-        print(f'\nRunning cross validation {i}/{k}')
+        print(f'Running cross validation {i+1}/{k}')
         N = len(self.labels)
         indices = np.arange(N)
         test_size = N//k
@@ -86,20 +87,23 @@ class Manifest:
 
         test_labels = [self.labels[index] for index in test_indices]
         test_data = [embeddings[index] for index in test_indices]
-        test_dataset = ListDataset(test_data,test_labels)
+        test_ids = [self.ids[index] for index in test_indices]
+        test_dataset = ListDataset(test_data,test_labels,test_ids)
         test_dataloader = DataLoader(test_dataset,batch_size = 1, shuffle = True)
 
         train_labels = [self.labels[index] for index in train_indices]
         train_data = [embeddings[index] for index in train_indices]
-        train_dataset = ListDataset(train_data,train_labels)
+        train_ids = [self.ids[index] for index in train_indices]
+        train_dataset = ListDataset(train_data,train_labels,train_ids)
         train_dataloader = DataLoader(train_dataset,batch_size = 1, shuffle = True)
 
         return train_dataloader, test_dataloader
 
 class ListDataset(Dataset):
-    def __init__(self, data_list, labels_list):
+    def __init__(self, data_list, labels_list,ids_list):
         self.data_list = data_list
         self.labels_list = labels_list
+        self.ids_list = ids_list
 
     def __len__(self):
         return len(self.data_list)
@@ -107,9 +111,8 @@ class ListDataset(Dataset):
     def __getitem__(self, idx):
         data = self.data_list[idx]
         label = self.labels_list[idx]
-        return torch.tensor(data, dtype=torch.float32), torch.tensor(label, dtype=torch.float32)
-
-
+        id = self.ids_list[idx][0]
+        return torch.tensor(data, dtype=torch.float32), torch.tensor(label, dtype=torch.float32), id
 
 @dataclass
 class ManifestEntry:
@@ -173,14 +176,17 @@ class ManifestEntry:
             for start, end in indices:
                 self._child_segments.append(audio[start:end])
 
-
         return self._child_segments
     
 def load_data(hps):
     data = Manifest()
+    filenames = [entry.name for entry in data.entries]
 
     embeddings = data.get_wav2vec2_embeddings()
     labels = data.labels
+    if len(labels) != len(filenames):
+        print('labels and filenames count mismatch')
+        raise ValueError
 
     train_embs = embeddings[:-hps.num_testing]
     train_labels = labels[:-hps.num_testing]

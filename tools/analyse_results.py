@@ -1,5 +1,6 @@
 import json
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 
 def generate_table(labels, preds):
@@ -35,7 +36,10 @@ def analyse_table(table):
     return analysis
 
 if __name__ == '__main__':
-    with open('./results/results_test2.json','r') as f:
+    results_name = 'test2_2' # not including results_
+    output_folder = f'./results/{results_name}/'
+    os.makedirs(output_folder, exist_ok=True)
+    with open(f'{output_folder}/results.json','r') as f:
         results = json.load(f)
 
     balanced_accuracies = []
@@ -67,11 +71,11 @@ if __name__ == '__main__':
     print(np.mean(balanced_accuracies))
     print(np.mean(sensitivities))
     print(np.mean(specificities))
-    plt.savefig('./plots/losses.png')
+    plt.savefig(f'{output_folder}/losses.png')
     plt.close()
     lens = np.array([len(c00),len(c05),len(c10)])
     plt.violinplot([c00,c05,c10],[0,0.5,1],widths=0.5* lens/np.max(lens))
     plt.xticks([0,0.5,1])
     plt.xlabel('Actual Diagnosis')
     plt.ylabel('Prediced Diagnosis')
-    plt.savefig('./plots/violin.png')
+    plt.savefig(f'{output_folder}/violin.png')

@@ -1,0 +1,1 @@
+(myenv) mf730@air116:~/exp-mf730$ ./run_crossvalidate.sh --config ./configs/test2_2.json
