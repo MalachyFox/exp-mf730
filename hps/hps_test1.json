@@ -1,5 +1,6 @@
 {
     "name": "test1",
+    "manifest_path": "/home/mifs/mf730/exp-mf730/manifest.json",
     "batch_size": 1,
     "lr": 0.001,
     "num_epochs": 5,
