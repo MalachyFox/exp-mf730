@@ -21,10 +21,13 @@ def do_train(model, train_dataloader, hps,saving=False):
         model.train()
         total_loss = 0
 
-        for inputs, targets, _ in train_dataloader:
+        for inputs, lengths, targets, ids in train_dataloader:
+            print('input size')
+            print(inputs.shape)
+            print(targets.shape)
 
-            inputs, targets = inputs.squeeze(), targets.squeeze()
-            outputs = model(inputs).squeeze()
+            targets = targets.squeeze()
+            outputs = model(inputs,lengths).squeeze()
             loss = loss_function(outputs,targets)
 
             optimizer.zero_grad()

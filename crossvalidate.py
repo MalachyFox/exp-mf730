@@ -8,12 +8,31 @@ from testing import do_test
 import json
 import argparse
 import os
+from multiprocessing import Pool
 
 def load_model(hps):
     model_name = hps.model
     model_class = getattr(models,model_name)
     model = model_class(hps)
     return model
+
+def crossvalidation_task(args):
+    i,k,manifest,hps,name = args
+    model = load_model(hps)
+    
+    hps.name = f'{name}_{i}i_{k}k' # change this probably
+    
+    # Folded dataloader
+    train, test = manifest.get_k(i,hps)
+    
+    # Train
+    losses = do_train(model,train,hps)
+
+    # Test 
+    result = do_test(model,test,hps)
+    return {'fold':i,
+            'losses':losses,
+            'result': result}
 
 if __name__ == "__main__":
     # Parse command-line arguments
@@ -31,23 +50,10 @@ if __name__ == "__main__":
 
     # Run crossvalidation
     results = []
-    for i in range(k):
-        model = load_model(hps)
-    
-        hps.name = f'{name}_{i}i_{k}k' # change this probably
+    args_list = [(i, k, manifest, hps, name) for i in range(k)]
+    with Pool(processes=1) as pool:
+        results = pool.map(crossvalidation_task, args_list)
         
-        #Folded dataloader
-        train, test = manifest.get_k(i,k)
-        
-        # Train
-        losses = do_train(model,train,hps)
-
-        # Test 
-        result = do_test(model,test,hps)
-        results.append({'fold':i,
-                        'losses':losses,
-                        'result': result})
-
     # Save results
     results_folder = f'./results/{name}'
     results_path = f'{results_folder}/results.json'

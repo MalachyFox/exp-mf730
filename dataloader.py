@@ -13,6 +13,7 @@ from transformers import Wav2Vec2Processor, Wav2Vec2Model
 import torch.nn.functional as F
 import time
 from torch.utils.data import DataLoader, Dataset
+from torch.nn.utils.rnn import pad_sequence
 
 
 class Manifest:
@@ -71,7 +72,8 @@ class Manifest:
 
         return embeddings
 
-    def get_k(self,i,k):
+    def get_k(self,i,hps):
+        k = hps.k_fold
         print(f'Running cross validation {i+1}/{k}')
         N = len(self.labels)
         indices = np.arange(N)
@@ -89,13 +91,13 @@ class Manifest:
         test_data = [embeddings[index] for index in test_indices]
         test_ids = [self.ids[index] for index in test_indices]
         test_dataset = ListDataset(test_data,test_labels,test_ids)
-        test_dataloader = DataLoader(test_dataset,batch_size = 1, shuffle = True)
+        test_dataloader = DataLoader(test_dataset,batch_size = hps.batch_size, shuffle = True)
 
         train_labels = [self.labels[index] for index in train_indices]
         train_data = [embeddings[index] for index in train_indices]
         train_ids = [self.ids[index] for index in train_indices]
         train_dataset = ListDataset(train_data,train_labels,train_ids)
-        train_dataloader = DataLoader(train_dataset,batch_size = 1, shuffle = True)
+        train_dataloader = DataLoader(train_dataset,batch_size = hps.batch_size, shuffle = True, collate_fn=collate_fn)
 
         return train_dataloader, test_dataloader
 
@@ -109,10 +111,23 @@ class ListDataset(Dataset):
         return len(self.data_list)
 
     def __getitem__(self, idx):
-        data = self.data_list[idx]
+        sequence = self.data_list[idx].squeeze()
+        length = sequence.shape[0]
         label = self.labels_list[idx]
         id = self.ids_list[idx]
-        return torch.tensor(data, dtype=torch.float32), torch.tensor(label, dtype=torch.float32), id
+        label = torch.tensor(label, dtype=torch.float32)
+        return sequence, length, label, id
+
+def collate_fn(batch):
+    sequences, lengths, labels,ids = zip(*batch)
+    padded_sequences = pad_sequence(sequences, batch_first=True, padding_value=0)
+    lengths = torch.tensor(lengths)
+    labels = torch.tensor(labels)
+    lengths, sorted_idx = lengths.sort(0, descending=True)
+    padded_sequences = padded_sequences[sorted_idx]
+    labels = labels[sorted_idx]
+    
+    return padded_sequences, lengths, labels, ids
 
 @dataclass
 class ManifestEntry:
