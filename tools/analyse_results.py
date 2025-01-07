@@ -2,6 +2,7 @@ import json
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+import argparse
 
 def generate_table(labels, preds):
     TP = 0
@@ -37,13 +38,13 @@ def analyse_table(table):
 
 if __name__ == '__main__':
 
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description="Run analysis on results JSON file.")
+    parser.add_argument("--test_name", required=True, help="Path to the results JSON file.")
+    args = parser.parse_args()
+    test_name = args.test_name # not including results_
 
-    output = ""
-    results_name = 'test2_2' # not including results_
-
-
-
-    output_folder = f'./results/{results_name}/'
+    output_folder = f'./results/{test_name}/'
     os.makedirs(output_folder, exist_ok=True)
     with open(f'{output_folder}/results.json','r') as f:
         results = json.load(f)
@@ -68,7 +69,7 @@ if __name__ == '__main__':
                 c10.append(pred)
         print(f'\nFold: {fold["fold"] + 1}')
         for i in range(len(labels)):
-            print(ids[i],preds[i],labels[i])
+            print(ids[i][0],preds[i],labels[i])
         #print(labels,preds)
         plt.plot(losses)
         

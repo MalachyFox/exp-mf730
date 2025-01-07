@@ -111,7 +111,7 @@ class ListDataset(Dataset):
     def __getitem__(self, idx):
         data = self.data_list[idx]
         label = self.labels_list[idx]
-        id = self.ids_list[idx][0]
+        id = self.ids_list[idx]
         return torch.tensor(data, dtype=torch.float32), torch.tensor(label, dtype=torch.float32), id
 
 @dataclass

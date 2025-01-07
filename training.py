@@ -9,13 +9,12 @@ from datetime import datetime
 from pprint import pprint
 
 
-
 def do_train(model, train_dataloader, hps,saving=False):
     print('Training...')
 
     optimizer = torch.optim.Adam(model.parameters(), lr = hps.lr)
 
-    loss_function = nn.BCEWithLogitsLoss()
+    loss_function = model.loss_func()
     losses = []
     best_loss = 100
     for epoch in range(hps.num_epochs):
@@ -45,12 +44,6 @@ def do_train(model, train_dataloader, hps,saving=False):
         print(f"epoch {epoch+1:04}/{hps.num_epochs:04}, loss: {avg_loss:.4f}")
     return losses
 
-def plot_losses(losses,name):
-    plt.plot(losses)
-    plt.xlabel('epoch')
-    plt.ylabel('loss')
-    plt.yscale('log')
-    plt.savefig(f'./plots/train_losses_{name}.png')
 
 def timestamp():
     return datetime.now().strftime("%Y-%m-%d_%H-%M")

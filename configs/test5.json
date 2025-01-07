@@ -1,7 +1,7 @@
 {
-    "name": "test2",
+    "name": "test5",
     "manifest_path": "/home/mifs/mf730/exp-mf730/manifest.json",
-    "model": "LSTMClassifier",
+    "model": "LSTM_MSE",
     "batch_size": 1,
     "lr": 0.001,
     "num_epochs": 10,

@@ -7,6 +7,13 @@ from training import do_train
 from testing import do_test
 import json
 import argparse
+import os
+
+def load_model(hps):
+    model_name = hps.model
+    model_class = getattr(models,model_name)
+    model = model_class(hps)
+    return model
 
 if __name__ == "__main__":
     # Parse command-line arguments
@@ -19,14 +26,14 @@ if __name__ == "__main__":
     manifest = Manifest(hps.manifest_path)
     k = hps.k_fold
     name = hps.name
-    model_name = hps.model
-    model_class = getattr(models,model_name)
-    model = model_class(hps)
+    
     pprint(hps)
 
     # Run crossvalidation
     results = []
     for i in range(k):
+        model = load_model(hps)
+    
         hps.name = f'{name}_{i}i_{k}k' # change this probably
         
         #Folded dataloader
@@ -42,7 +49,9 @@ if __name__ == "__main__":
                         'result': result})
 
     # Save results
-    results_path = f'./results/{name}/results.json'
+    results_folder = f'./results/{name}'
+    results_path = f'{results_folder}/results.json'
+    os.makedirs(results_folder, exist_ok=True)
     print(f'Saving results to {results_path}')
     with open(results_path,'w') as f:
         json.dump(results,f,indent=4)

@@ -1,0 +1,14 @@
+{
+    "name": "test4",
+    "manifest_path": "/home/mifs/mf730/exp-mf730/manifest.json",
+    "model": "LSTMClassifier",
+    "batch_size": 1,
+    "lr": 0.001,
+    "num_epochs": 10,
+    "input_size": 768,
+    "hidden_size": 256,
+    "num_layers": 1,
+    "lrs_step_size": 5,
+    "lrs_gamma": 0.5,
+    "k_fold": 5
+}
