@@ -97,6 +97,7 @@ if __name__ == '__main__':
     lens = np.array([len(c00),len(c05),len(c10)])
     plt.violinplot([c00,c05,c10],[0,0.5,1],widths=0.5* lens/np.max(lens))
     plt.xticks([0,0.5,1])
+    plt.ylim(0,1)
     plt.xlabel('Actual Diagnosis')
     plt.ylabel('Prediced Diagnosis')
     plt.savefig(f'{output_folder}/violin.png')

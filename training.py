@@ -11,7 +11,7 @@ from pprint import pprint
 
 def do_train(model, train_dataloader, hps,saving=False):
     print('Training...')
-
+    
     optimizer = torch.optim.Adam(model.parameters(), lr = hps.lr)
 
     loss_function = model.loss_func()
