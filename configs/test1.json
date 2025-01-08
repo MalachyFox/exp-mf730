@@ -10,5 +10,6 @@
     "num_layers": 1,
     "lrs_step_size": 5,
     "lrs_gamma": 0.5,
-    "k_fold": 5
+    "k_fold": 5,
+    "embeddings":"wav2vec2-base"
 }

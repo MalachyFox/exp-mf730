@@ -70,8 +70,13 @@ class Manifest:
             torch.save(embeddings,path)
 
         return embeddings
+    
+    def get_embeddings(self,model_name,embeddings_folder = '/research/milsrg1/sld/exp-mf730/embeddings'):
+        if model_name == 'wav2vec2-base':
+            return self.getwav2vec2_embeddings(model_name,embeddings_folder)
 
-    def get_k(self,i,k):
+    def get_k(self,i,hps):
+        k = hps.k
         print(f'Running cross validation {i+1}/{k}')
         N = len(self.labels)
         indices = np.arange(N)
@@ -83,7 +88,7 @@ class Manifest:
         test_indices = list(indices[start:end])
         train_indices = list(np.concatenate((indices[:start],indices[end:])))
 
-        embeddings = self.get_wav2vec2_embeddings()
+        embeddings = self.get_embeddings(hps.embeddings)
 
         test_labels = [self.labels[index] for index in test_indices]
         test_data = [embeddings[index] for index in test_indices]
@@ -187,7 +192,7 @@ def load_data(hps):
     if len(labels) != len(filenames):
         print('labels and filenames count mismatch')
         raise ValueError
-
+    
     train_embs = embeddings[:-hps.num_testing]
     train_labels = labels[:-hps.num_testing]
     train_dataset = ListDataset(train_embs,train_labels)

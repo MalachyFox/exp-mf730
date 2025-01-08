@@ -37,7 +37,7 @@ if __name__ == "__main__":
         hps.name = f'{name}_{i}i_{k}k' # change this probably
         
         #Folded dataloader
-        train, test = manifest.get_k(i,k)
+        train, test = manifest.get_k(i,hps)
         
         # Train
         losses = do_train(model,train,hps)

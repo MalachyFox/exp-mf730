@@ -9,5 +9,6 @@
     "hidden_size": 256,
     "num_layers": 2,
     "linear_size":16,
-    "k_fold": 5
+    "k_fold": 5,
+    "embeddings":"wav2vec2-base"
 }
