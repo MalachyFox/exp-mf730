@@ -49,6 +49,8 @@ if __name__ == '__main__':
     with open(f'{output_folder}/results.json','r') as f:
         results = json.load(f)
 
+    prediction_list = []
+
     balanced_accuracies = []
     sensitivities = []
     specificities = []
@@ -69,9 +71,12 @@ if __name__ == '__main__':
                 c10.append(pred)
         print(f'\nFold: {fold["fold"] + 1}')
         for i in range(len(labels)):
-            print(ids[i][0],preds[i],labels[i])
+            item = [ids[i][0],preds[i],labels[i]]
+            prediction_list.append(item)
+            print(item)
         #print(labels,preds)
         plt.plot(losses)
+
         
         table = generate_table(labels, preds)
         analysis = analyse_table(table)
@@ -91,7 +96,18 @@ if __name__ == '__main__':
 
     with open(f'{output_folder}/analysis.txt', "w") as f:
         json.dump(combined_analysis, f, indent=4)
-        
+
+    prediction_list = np.array(prediction_list)
+    diffs = np.array([abs(float(a[2]) - float(a[1])) for a in prediction_list])
+    sorted_indices = diffs.argsort()
+    sorted_predictions = prediction_list[sorted_indices]
+    
+    np.savetxt(f'{output_folder}/predictions.txt', sorted_predictions, fmt='%s')
+
+    
+    plt.yscale('log')
+    plt.ylabel('Log Loss')
+    plt.xlabel('Epoch')
     plt.savefig(f'{output_folder}/losses.png')
     plt.close()
     lens = np.array([len(c00),len(c05),len(c10)])
