@@ -94,7 +94,7 @@ if __name__ == '__main__':
     for key, value in combined_analysis.items():
         print(f"{key}: {value}")
 
-    with open(f'{output_folder}/analysis.txt', "w") as f:
+    with open(f'{output_folder}/statistics.txt', "w") as f:
         json.dump(combined_analysis, f, indent=4)
 
     prediction_list = np.array(prediction_list)

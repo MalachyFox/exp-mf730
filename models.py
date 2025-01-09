@@ -65,3 +65,37 @@ class LSTMClassifier2(nn.Module):
     
     def loss_func(self):
         return nn.BCEWithLogitsLoss()
+    
+class LSTMClassifierBi(nn.Module):
+    def __init__(self, hps):
+        super(LSTMClassifierBi, self).__init__()
+        self.lstm = nn.LSTM(hps.input_size, hps.hidden_size, hps.num_layers, batch_first=True,bidirectional=True)
+        self.linear1 = nn.Linear(in_features=hps.hidden_size*2,out_features=hps.linear_size)
+        self.linear2 = nn.Linear(in_features=hps.linear_size,out_features=1)
+
+    def forward(self, x):
+        output, (hidden, cell) = self.lstm(x)
+        out = cell.flatten()
+        out = self.linear1(out)
+        out = self.linear2(out)
+        return out
+    
+    def loss_func(self):
+        return nn.BCEWithLogitsLoss()
+
+class LSTMClassifierBiLarge(nn.Module):
+    def __init__(self, hps):
+        super(LSTMClassifierBiLarge, self).__init__()
+        self.lstm = nn.LSTM(hps.input_size, hps.hidden_size, hps.num_layers, batch_first=True,bidirectional=True)
+        self.linear1 = nn.Linear(in_features=hps.hidden_size*2,out_features=hps.linear_size)
+        self.linear2 = nn.Linear(in_features=hps.linear_size,out_features=1)
+
+    def forward(self, x):
+        output, (hidden, cell) = self.lstm(x)
+        out = cell[-2:].flatten()
+        out = self.linear1(out)
+        out = self.linear2(out)
+        return out
+    
+    def loss_func(self):
+        return nn.BCEWithLogitsLoss()

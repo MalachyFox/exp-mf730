@@ -73,10 +73,10 @@ class Manifest:
     
     def get_embeddings(self,model_name,embeddings_folder = '/research/milsrg1/sld/exp-mf730/embeddings'):
         if model_name == 'wav2vec2-base':
-            return self.getwav2vec2_embeddings(model_name,embeddings_folder)
+            return self.get_wav2vec2_embeddings(model_name,embeddings_folder)
 
     def get_k(self,i,hps):
-        k = hps.k
+        k = hps.k_fold
         print(f'Running cross validation {i+1}/{k}')
         N = len(self.labels)
         indices = np.arange(N)
@@ -115,9 +115,9 @@ class ListDataset(Dataset):
 
     def __getitem__(self, idx):
         data = self.data_list[idx]
-        label = self.labels_list[idx]
+        label = torch.tensor(self.labels_list[idx],dtype=torch.float32)
         id = self.ids_list[idx]
-        return torch.tensor(data, dtype=torch.float32), torch.tensor(label, dtype=torch.float32), id
+        return data, label, id
 
 @dataclass
 class ManifestEntry:
