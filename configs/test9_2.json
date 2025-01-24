@@ -1,0 +1,14 @@
+{
+    "name": "test9",
+    "manifest_path": "/home/mifs/mf730/exp-mf730/manifest.json",
+    "model": "LSTMClassifierBiLarge",
+    "batch_size": 1,
+    "lr": 0.001,
+    "num_epochs": 20,
+    "input_size": 768,
+    "hidden_size": 256,
+    "linear_size":64,
+    "num_layers": 1,
+    "k_fold": 5,
+    "embeddings":"wav2vec2-base"
+}

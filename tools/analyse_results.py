@@ -57,10 +57,14 @@ if __name__ == '__main__':
     c10 = []
     c05 = []
     c00 = []
+    plt.figure(constrained_layout=True)
     for fold in results:
         labels = fold['result']['labels']
         preds = fold['result']['preds']
-        ids = fold['result']['ids']
+        try:
+            ids = fold['result']['ids']
+        except:
+            ids = len(labels) * ['id']
         losses = fold['losses']
         for label, pred in zip(labels,preds):
             if label == 0:
