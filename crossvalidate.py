@@ -34,7 +34,7 @@ if __name__ == "__main__":
     for i in range(k):
         model = load_model(hps)
     
-        hps.name = f'{name}_{i}i_{k}k' # change this probably
+        hps.name = f'{name}_{i+1}i_{k}k' # change this probably
         
         #Folded dataloader
         train, test = manifest.get_k(i,hps)

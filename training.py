@@ -7,24 +7,30 @@ from torch.utils.data import DataLoader, TensorDataset, Dataset
 from dataclasses import dataclass
 from datetime import datetime
 from pprint import pprint
+import wandb
 
 
 def do_train(model, train_dataloader, hps,saving=False):
     print('Training...')
+
+    wandb.init(
+    project="speech-disorders",
+    config = hps
+    )
     
     optimizer = torch.optim.Adam(model.parameters(), lr = hps.lr)
 
     loss_function = model.loss_func()
     losses = []
-    best_loss = 100
+
     for epoch in range(hps.num_epochs):
         model.train()
         total_loss = 0
 
         for inputs, targets, _ in train_dataloader:
 
-            inputs, targets = inputs.squeeze(), targets.squeeze()
-            outputs = model(inputs).squeeze()
+            outputs = model(inputs)
+            outputs, targets = outputs.squeeze(), targets.squeeze()
             loss = loss_function(outputs,targets)
 
             optimizer.zero_grad()
@@ -35,13 +41,9 @@ def do_train(model, train_dataloader, hps,saving=False):
         
         avg_loss = total_loss / len(train_dataloader)
 
-        if saving:
-            if avg_loss < best_loss:
-                best_loss = avg_loss
-                save_checkpoint(model,hps,name='best')
-            save_checkpoint(model,hps,name='epoch{epoch}')
         losses.append(avg_loss)
         print(f"epoch {epoch+1:04}/{hps.num_epochs:04}, loss: {avg_loss:.4f}")
+        wandb.log({"loss": loss},step=epoch)
     return losses
 
 

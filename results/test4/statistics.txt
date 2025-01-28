@@ -1,5 +1,0 @@
-{
-    "balanced accuracy": 0.6404884004884006,
-    "sensitivity": 0.40888888888888897,
-    "specificity": 0.872087912087912
-}

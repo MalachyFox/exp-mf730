@@ -2,120 +2,44 @@ import json
 import torch
 import torch.nn as nn
 from hyperparams import HyperParams
+    
+import torch
+import torch.nn as nn
 
 class LSTMClassifier(nn.Module):
     def __init__(self, hps):
         super(LSTMClassifier, self).__init__()
-        self.lstm = nn.LSTM(hps.input_size, hps.hidden_size, hps.num_layers, batch_first=True)
-        self.linear = nn.Linear(in_features=hps.hidden_size,out_features=1)
+        self.bidirectional = hps.bidirectional
+        self.hidden_size = hps.hidden_size
+        self.batch_size = hps.batch_size
+        num_directions = 2 if self.bidirectional else 1
 
-    def forward(self, x):
-        output, (hidden, cell) = self.lstm(x)
-        cell_top = cell[-1]
-        out = self.linear(cell_top)
-        return out
-    
-    def loss_func(self):
-        return nn.BCEWithLogitsLoss()
-    
-class LSTMRegression(nn.Module):
-    def __init__(self, hps):
-        super(LSTMRegression, self).__init__()
-        self.lstm = nn.LSTM(hps.input_size, hps.hidden_size, hps.num_layers, batch_first=True)
-        self.linear = nn.Linear(in_features=hps.hidden_size,out_features=1)
+        self.lstm = nn.LSTM(
+            input_size=hps.input_size,
+            hidden_size=hps.hidden_size,
+            num_layers=hps.num_layers,
+            batch_first=True,
+            bidirectional= bool(hps.bidirectional),
+            dropout=hps.dropout
+        )
 
-    def forward(self, x):
-        output, (hidden, cell) = self.lstm(x)
-        out = self.linear(cell)
-        return out
-    
-    def loss_func(self):
-        return nn.MSELoss()
-    
-class LSTM_MSE(nn.Module):
-
-    def __init__(self, hps):
-        super(LSTM_MSE, self).__init__()
-        self.lstm = nn.LSTM(hps.input_size, hps.hidden_size, hps.num_layers, batch_first=True)
-        self.linear = nn.Linear(in_features=hps.hidden_size,out_features=1)
-        self.sigmoid = nn.Sigmoid()
-
-    def forward(self, x):
-        output, (hidden, cell) = self.lstm(x)
-        out = self.linear(cell)
-        out = self.sigmoid(out)
-        return out
-    
-    def loss_func(self):
-        return nn.MSELoss()
-    
-class LSTMClassifier2(nn.Module):
-    def __init__(self, hps):
-        super(LSTMClassifier2, self).__init__()
-        self.lstm = nn.LSTM(hps.input_size, hps.hidden_size, hps.num_layers, batch_first=True)
-        self.linear1 = nn.Linear(in_features=hps.hidden_size,out_features=hps.linear_size)
-        self.linear2 = nn.Linear(in_features=hps.linear_size,out_features=1)
-
-    def forward(self, x):
-        output, (hidden, cell) = self.lstm(x)
-        out = cell[-1]
-        out = self.linear1(out)
-        out = self.linear2(out)
-        return out
-    
-    def loss_func(self):
-        return nn.BCEWithLogitsLoss()
-    
-class LSTMClassifierBi(nn.Module):
-    def __init__(self, hps):
-        super(LSTMClassifierBi, self).__init__()
-        self.lstm = nn.LSTM(hps.input_size, hps.hidden_size, hps.num_layers, batch_first=True,bidirectional=True)
-        self.linear1 = nn.Linear(in_features=hps.hidden_size*2,out_features=hps.linear_size)
-        self.linear2 = nn.Linear(in_features=hps.linear_size,out_features=1)
-
-    def forward(self, x):
-        output, (hidden, cell) = self.lstm(x)
-        out = cell.flatten()
-        out = self.linear1(out)
-        out = self.linear2(out)
-        return out
-    
-    def loss_func(self):
-        return nn.BCEWithLogitsLoss()
-
-class LSTMClassifierBiLarge(nn.Module):
-    def __init__(self, hps):
-        super(LSTMClassifierBiLarge, self).__init__()
-        self.lstm = nn.LSTM(hps.input_size, hps.hidden_size, hps.num_layers, batch_first=True,bidirectional=True)
-        self.linear1 = nn.Linear(in_features=hps.hidden_size*2,out_features=hps.linear_size)
-        self.linear2 = nn.Linear(in_features=hps.linear_size,out_features=1)
-
-    def forward(self, x):
-        output, (hidden, cell) = self.lstm(x)
-        out = cell[-2:].flatten()
-        out = self.linear1(out)
-        out = self.linear2(out)
-        return out
-    
-    def loss_func(self):
-        return nn.BCEWithLogitsLoss()
-    
-class LSTMClassifierBiLarge2(nn.Module):
-    def __init__(self, hps):
-        super(LSTMClassifierBiLarge2, self).__init__()
-        self.lstm = nn.LSTM(hps.input_size, hps.hidden_size, hps.num_layers, batch_first=True,bidirectional=True)
-        self.linear1 = nn.Linear(in_features=hps.hidden_size*2,out_features=hps.linear_size)
+        self.linear1 = nn.Linear(in_features=hps.hidden_size * num_directions, out_features=hps.linear_size)
         self.relu = nn.ReLU()
-        self.linear2 = nn.Linear(in_features=hps.linear_size,out_features=1)
+        self.linear2 = nn.Linear(in_features=hps.linear_size, out_features=1)
+        self.dropout = nn.Dropout(hps.dropout)
 
     def forward(self, x):
         output, (hidden, cell) = self.lstm(x)
-        out = cell[-2:].flatten()
+
+        if self.bidirectional:
+            out = torch.cat((cell[-2], cell[-1]), dim=1).reshape(self.batch_size,2 * self.hidden_size)
+        else:
+            out = cell[-1].reshape(self.batch_size,self.hidden_size)
         out = self.linear1(out)
         out = self.relu(out)
+        out = self.dropout(out)
         out = self.linear2(out)
         return out
-    
+
     def loss_func(self):
         return nn.BCEWithLogitsLoss()
-    

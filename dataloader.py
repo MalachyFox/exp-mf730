@@ -94,13 +94,13 @@ class Manifest:
         test_data = [embeddings[index] for index in test_indices]
         test_ids = [self.ids[index] for index in test_indices]
         test_dataset = ListDataset(test_data,test_labels,test_ids)
-        test_dataloader = DataLoader(test_dataset,batch_size = 1, shuffle = True)
+        test_dataloader = DataLoader(test_dataset,batch_size = hps.batch_size, shuffle = True)
 
         train_labels = [self.labels[index] for index in train_indices]
         train_data = [embeddings[index] for index in train_indices]
         train_ids = [self.ids[index] for index in train_indices]
         train_dataset = ListDataset(train_data,train_labels,train_ids)
-        train_dataloader = DataLoader(train_dataset,batch_size = 1, shuffle = True)
+        train_dataloader = DataLoader(train_dataset,batch_size = hps.batch_size, shuffle = True)
 
         return train_dataloader, test_dataloader
 
@@ -114,8 +114,8 @@ class ListDataset(Dataset):
         return len(self.data_list)
 
     def __getitem__(self, idx):
-        data = self.data_list[idx]
-        label = torch.tensor(self.labels_list[idx],dtype=torch.float32)
+        data = self.data_list[idx].squeeze()
+        label = torch.tensor(self.labels_list[idx],dtype=torch.float32).squeeze()
         id = self.ids_list[idx]
         return data, label, id
 

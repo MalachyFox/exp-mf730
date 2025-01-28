@@ -1,3 +1,7 @@
 exp-pcaj2_copy
 ignored
 embeddings
+results
+configs
+wandb
+__pycache__
