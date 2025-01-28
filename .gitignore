@@ -5,3 +5,5 @@ results
 configs
 wandb
 __pycache__
+plots
+checkpoints
