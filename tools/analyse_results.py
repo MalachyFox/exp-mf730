@@ -4,7 +4,9 @@ import os
 import matplotlib.pyplot as plt
 import argparse
 
-def generate_table(labels, preds):
+def generate_table(results):
+    labels = [r[1] for r in results]
+    preds = [r[3] for r in results]
     TP = 0
     FP = 0
     TN = 0
@@ -36,6 +38,21 @@ def analyse_table(table):
                 'balanced_accuracy': balanced_accuracy}
     return analysis
 
+def add_clamped(results):
+    out = []
+    for r in results:
+        id, label, pred = r
+        clamped = pred >= 0.5
+        out.append((id,label,pred,clamped))
+    return out
+
+def analyse(results):
+
+    results = add_clamped(results)
+    table = generate_table(results)
+    analysis = analyse_table(table)
+    return analysis
+
 if __name__ == '__main__':
 
     # Parse command-line arguments
@@ -49,71 +66,24 @@ if __name__ == '__main__':
     with open(f'{output_folder}/results.json','r') as f:
         results = json.load(f)
 
-    prediction_list = []
 
-    balanced_accuracies = []
-    sensitivities = []
-    specificities = []
-    c10 = []
-    c05 = []
-    c00 = []
-    plt.figure(constrained_layout=True)
-    for fold in results:
-        labels = fold['result']['labels']
-        preds = fold['result']['preds']
-        try:
-            ids = fold['result']['ids']
-        except:
-            ids = len(labels) * ['id']
-        losses = fold['losses']
-        for label, pred in zip(labels,preds):
-            if label == 0:
-                c00.append(pred)
-            if label == 0.5:
-                c05.append(pred)
-            if label == 1.0:
-                c10.append(pred)
-        print(f'\nFold: {fold["fold"] + 1}')
-        for i in range(len(labels)):
-            item = [ids[i][0],preds[i],labels[i]]
-            prediction_list.append(item)
-            print(item)
-        #print(labels,preds)
-        plt.plot(losses)
+    analysis = analyse(results)
 
-        
-        table = generate_table(labels, preds)
-        analysis = analyse_table(table)
-        balanced_accuracies.append(analysis['balanced_accuracy'])
-        sensitivities.append(analysis['sensitivity'])
-        specificities.append(analysis['specificity'])
-
-        for key, value in analysis.items():
-            print(f"{key}: {value}")
-    
-    combined_analysis = {   'balanced accuracy': np.mean(balanced_accuracies),
-                            'sensitivity': np.mean(sensitivities),
-                            'specificity': np.mean(specificities)}
-    print()
-    for key, value in combined_analysis.items():
-        print(f"{key}: {value}")
 
     with open(f'{output_folder}/statistics.txt', "w") as f:
-        json.dump(combined_analysis, f, indent=4)
+        json.dump(analysis, f, indent=4)
 
-    prediction_list = np.array(prediction_list)
-    diffs = np.array([abs(float(a[2]) - float(a[1])) for a in prediction_list])
+    results = np.array(results)
+    diffs = np.array([abs(float(a[2]) - float(a[1])) for a in results])
     sorted_indices = diffs.argsort()
-    sorted_predictions = prediction_list[sorted_indices]
+    sorted_predictions = results[sorted_indices]
     
     np.savetxt(f'{output_folder}/predictions.txt', sorted_predictions, fmt='%s')
 
-    
-    plt.yscale('log')
-    plt.ylabel('Log Loss')
-    plt.xlabel('Epoch')
-    plt.savefig(f'{output_folder}/losses.png')
-    plt.close()
+    c00 = [float(r[2]) for r in results if r[1] == '0.0']
+    c05 = [float(r[2]) for r in results if r[1] == '0.5']
+    c10 = [float(r[2]) for r in results if r[1] == '1.0']
+
     lens = np.array([len(c00),len(c05),len(c10)])
     plt.violinplot([c00,c05,c10],[0,0.5,1],widths=0.5* lens/np.max(lens))
     plt.xticks([0,0.5,1])

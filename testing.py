@@ -5,25 +5,18 @@ from hyperparams import HyperParams
 import matplotlib.pyplot as plt
 from pprint import pprint
 
-def get_results(model,dataloader):
+def do_test(model,dataloader,hps):
     with torch.no_grad():
-        labels = []
-        preds = []
-        ids = []
+        results = []
+        loss_func = model.loss_func()
+        total_loss = 0
         for data, label, id in dataloader:
-            data, label = data.squeeze(), label.squeeze().item()
-            output = model(data)
-            pred = torch.sigmoid(output).squeeze().item()
-            preds.append(pred)
-            labels.append(label)
-            ids.append(id)
-        plt.scatter(labels,preds)
-        plt.savefig('./plots/testing_recent.png')
-        return {'labels': labels,
-                'preds': preds,
-                'ids':ids}
+            data, label = data.squeeze(), label.squeeze()
+            pred = model(data).squeeze()
 
-def do_test(model,test_dataloader,hps):
-    print('Testing...')
-    results = get_results(model,test_dataloader)
-    return results
+            total_loss += loss_func(pred,label)
+
+            results.append((id[0],label.item(),pred.item()))
+
+        avg_loss = total_loss/len(dataloader)
+        return avg_loss, results
