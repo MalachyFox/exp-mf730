@@ -94,7 +94,7 @@ class Manifest:
         test_data = [embeddings[index] for index in test_indices]
         test_ids = [self.ids[index] for index in test_indices]
         test_dataset = ListDataset(test_data,test_labels,test_ids)
-        test_dataloader = DataLoader(test_dataset,batch_size = hps.batch_size, shuffle = True)
+        test_dataloader = DataLoader(test_dataset,batch_size = 1, shuffle = True)
 
         train_labels = [self.labels[index] for index in train_indices]
         train_data = [embeddings[index] for index in train_indices]
