@@ -1,11 +1,13 @@
 from dataclasses import dataclass, asdict
 import json
+import torch
 
 @dataclass
 class HyperParams():
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
+        self.group = self.name
 
     @classmethod
     def load_json(self,path):
