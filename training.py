@@ -17,7 +17,7 @@ def timestamp():
 
 def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
     print('Training...')
-    if hps.threads > 1:
+    if hps.threads > 1 and hps.device == 'cpu':
         torch.set_num_threads(os.cpu_count()//hps.threads)
     wandb.init(
     project="speech-disorders",
@@ -37,8 +37,11 @@ def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
         total_loss = 0
 
         for inputs, targets, _ in train_dataloader:
+            inputs = inputs.to(hps.device)
+            targets = targets.to(hps.device)
 
             outputs = model(inputs)
+
             outputs, targets = outputs.squeeze(), targets.squeeze()
             loss = loss_function(outputs,targets)
 

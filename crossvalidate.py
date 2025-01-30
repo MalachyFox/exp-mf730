@@ -18,7 +18,7 @@ def load_model(hps):
 
 def crossvalidation_task(args):
     i,k,manifest,hps,name = args
-    model = load_model(hps)
+    model = load_model(hps).to(hps.device)
     
     hps.name = f'{name}_{i+1}i_{k}k' # change this probably
     

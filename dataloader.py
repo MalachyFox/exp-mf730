@@ -8,10 +8,8 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from tools.create_manifest import get_orthographic_data
 import torch
-import torchaudio
 from transformers import Wav2Vec2Processor, Wav2Vec2Model
 import torch.nn.functional as F
-import time
 from torch.utils.data import DataLoader, Dataset
 
 
@@ -31,7 +29,7 @@ class Manifest:
         path = f'{embeddings_folder}/{embedding_file}'
         if os.path.exists(path):
             print(f'\nLoading embeddings for {self.manifest_path} from {path}\n')
-            embeddings = torch.load(path,weights_only=True)
+            embeddings = torch.load(path)
         else:
             print(f'\ngenerating embeddings for {self.manifest_path} using {model_name} and saving to {embeddings_folder}\n')
             model_id = f'facebook/{model_name}'

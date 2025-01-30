@@ -11,8 +11,10 @@ def do_test(model,dataloader,hps):
         loss_func = model.loss_func()
         total_loss = 0
         for data, label, id in dataloader:
+            data = data.to(hps.device)
+            label = label.to(hps.device)
             data, label = data.squeeze(), label.squeeze()
-            pred = model(data).squeeze()
+            pred = model(data).squeeze().to(hps.device)
 
             total_loss += loss_func(pred,label)
 

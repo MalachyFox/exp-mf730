@@ -8,7 +8,7 @@ import torch.nn as nn
 
 class LSTMClassifier(nn.Module):
     def __init__(self, hps):
-        super(LSTMClassifier, self).__init__()
+        super().__init__()
         self.bidirectional = hps.bidirectional
         self.hidden_size = hps.hidden_size
         self.batch_size = hps.batch_size
@@ -43,6 +43,7 @@ class LSTMClassifier(nn.Module):
             out = torch.cat((cell[-2], cell[-1]), dim=1).reshape(self.batch_size,2 * self.hidden_size)
         else:
             out = cell[-1].reshape(self.batch_size,self.hidden_size)
+        out = self.dropout(out)
         out = self.linear1(out)
         out = self.relu(out)
         out = self.dropout(out)
@@ -64,45 +65,58 @@ class AttentionBlockModel(nn.Module):
         self.loss_function = hps.loss_function
         self.block_size = hps.block_size
         self.num_heads = hps.num_heads
-        self.attention = nn.MultiheadAttention(hps.input_size, hps.num_heads, batch_first=True).to(hps.device)
-        self.linear = nn.Linear(hps.input_size * hps.block_size, hps.mid_size).to(hps.device)  # Reduce attention output to a scalar
-        
-        # Second stage attention
-        self.final_attention = nn.MultiheadAttention(hps.num_heads,hps.num_heads, batch_first=True).to(hps.device)
-        self.final_output = nn.Linear(hps.mid_size, 1).to(hps.device)  # Final output scalar
-    
+
+        self.attention = nn.MultiheadAttention(hps.input_size, hps.num_heads, batch_first=True)
+        self.final_attention = nn.MultiheadAttention(hps.input_size,hps.num_heads, batch_first=True)
+        self.final_output = nn.Linear(hps.input_size, 2)
+        self.softmax = nn.Softmax(1)
+
     def forward(self, x):
         if len(x.shape) < 3:
             x = x.unsqueeze(0)
+
         x = x.to(self.device)  # Move input to the same device as model
         B, T, D = x.shape  # Batch, Sequence Length, Feature Dim
         
-        # Pad sequence length to be a multiple of block_size
-        pad_len = (self.block_size - (T % self.block_size)) % self.block_size
-        if pad_len > 0:
-            pad_tensor = torch.zeros((B, pad_len, D), device=x.device)
-            x = torch.cat([x, pad_tensor], dim=1)
+        # # Pad sequence length to be a multiple of block_size
+        # pad_len = (self.block_size - (T % self.block_size)) % self.block_size
+        # if pad_len > 0:
+        #     pad_tensor = torch.zeros((B, pad_len, D), device=x.device)
+        #     x = torch.cat([x, pad_tensor], dim=1)
+        #        x = x[:,:-1,:,:]
         
         # Reshape into blocks
         num_blocks = x.shape[1] // self.block_size
-        x = x.view(B, num_blocks, self.block_size, -1)
+        x = x[:,:num_blocks*self.block_size,:]
+        x = x.reshape(B, num_blocks, self.block_size, -1)
         
+        x = x.reshape(num_blocks,self.block_size,-1)
+        out, _ = self.attention(x, x, x)
+        out = torch.mean(out,axis=1)
+        print(out.shape)
+
         # Apply attention to each block
-        block_outputs = []
-        for i in range(num_blocks):
-            block = x[:, i, :, :]
-            attn_out, _ = self.attention(block, block, block) # B, block_size, input_size
-            # Aggregate the attended features to a single scalar
-            flattened = attn_out.reshape((B,-1))
-            linear_out = self.linear(flattened)
-            block_outputs.append(linear_out.reshape((B,1,-1)))
+        # block_outputs = []
+        # for i in range(num_blocks - 1):
+        #     block = x[:, i, :, :]
+        #     out, _ = self.attention(block, block, block) # B, L, E - B, L, L
+        #     out = torch.mean(out,dim=1).reshape(B,1,-1)
+        #     # weights = torch.mean(weights,dim=1) # B, L
+        #     # out = torch.matmul(weights,out) # computes batched weighted sum
+        #     block_outputs.append(out)
         
-        # Concatenate all block scalars
-        output = torch.cat(block_outputs,axis=1)  # Shape: (B, num_blocks_2, mid_size)
+        # # Concatenate all block scalars
+        # out = torch.cat(block_outputs,axis=1)  # Shape: (B, num_blocks_2, mid_size)
+
         # Apply second stage attention
-        final_attn_out, _ = self.final_attention(output, output, output)
-        final_output = self.final_output(final_attn_out.mean(dim=1))  # Final scalar output shape (B,1)
-        return final_output.squeeze(-1)  # Shape: (B,)
+        out, _ = self.final_attention(out, out, out) # B, L', E
+        # weights = torch.mean(weights,dim=1) # B, L
+        # out = torch.matmul(weights,out).reshape(B,-1) # computes batched weighted sum
+        out = torch.mean(out,dim=1)
+        out = self.final_output(out)  # Final scalar output shape (B,1)
+        out = self.softmax(out)
+        out = out[:,0]
+        return out  # Shape: (B,)
     
     def loss_func(self):
         if self.loss_function == 'bce':
