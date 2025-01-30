@@ -78,6 +78,8 @@ class Manifest:
         print(f'Running cross validation {i+1}/{k}')
         N = len(self.labels)
         indices = np.arange(N)
+        np.random.seed(0)
+        np.random.shuffle(indices)
         test_size = N//k
         extra = N % k
         start = i * test_size + min(i, extra)
@@ -95,6 +97,7 @@ class Manifest:
         test_dataloader = DataLoader(test_dataset,batch_size = 1, shuffle = True)
 
         train_labels = [self.labels[index] for index in train_indices]
+        print(f'training label counts: 1: {np.sum([1 for label in train_labels if int(label) == 1])}, 0.5: {np.sum([1 for label in train_labels if float(label) == 0.5])}, 0.0: {np.sum([1 for label in train_labels if float(label) == 0.0])}')
         train_data = [embeddings[index] for index in train_indices]
         train_ids = [self.ids[index] for index in train_indices]
         train_dataset = ListDataset(train_data,train_labels,train_ids)

@@ -5,15 +5,36 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader, TensorDataset, Dataset
 from dataclasses import dataclass
-from datetime import datetime
 from pprint import pprint
 import wandb
 import os
 from testing import do_test
 from tools.analyse_results import analyse
+from tqdm import tqdm
 
-def timestamp():
-    return datetime.now().strftime("%Y-%m-%d_%H-%M")
+class CustomLRScheduler(torch.optim.lr_scheduler.LambdaLR):
+    def __init__(self, optimizer, warmup_steps=20, hold_steps=20, decay_steps=20, max_lr=3e-5, final_lr=1e-6):
+        self.warmup_steps = warmup_steps
+        self.hold_steps = hold_steps
+        self.decay_steps = decay_steps
+        self.total_steps = warmup_steps + hold_steps + decay_steps
+        self.max_lr = max_lr
+        self.final_lr = final_lr
+
+        super().__init__(optimizer, self.lr_lambda)
+
+    def lr_lambda(self, step):
+        if step < self.warmup_steps:
+            # Linear warmup: increase from 0 to max_lr
+            return step / self.warmup_steps
+        elif step < self.warmup_steps + self.hold_steps:
+            # Hold max_lr constant
+            return 1.0
+        else:
+            # Exponential decay: decay to final_lr
+            decay_progress = (step - self.warmup_steps - self.hold_steps) / self.decay_steps
+            return (self.final_lr / self.max_lr) ** decay_progress  # Exponential decay formula
+
 
 def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
     print('Training...')
@@ -21,7 +42,7 @@ def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
         torch.set_num_threads(os.cpu_count()//hps.threads)
     wandb.init(
     project="speech-disorders",
-    group= f'{hps.group}_{timestamp()}',
+    group = hps.group,
     name = hps.name,
     config = hps
     )
@@ -29,6 +50,9 @@ def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
     optimizer = torch.optim.Adam(model.parameters(), lr = hps.lr,weight_decay=hps.weight_decay)
     if hps.scheduler == 'StepLR':
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer,step_size=hps.scheduler_step_size,gamma=hps.scheduler_gamma)
+    elif hps.scheduler == 'custom':
+        scheduler = CustomLRScheduler(optimizer)
+
     loss_function = model.loss_func()
     losses = []
 
@@ -36,7 +60,7 @@ def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
         model.train()
         total_loss = 0
 
-        for inputs, targets, _ in train_dataloader:
+        for inputs, targets, _ in tqdm(train_dataloader):
             inputs = inputs.to(hps.device)
             targets = targets.to(hps.device)
 
@@ -56,7 +80,6 @@ def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
         if hps.scheduler:
             scheduler.step()
         
-        
         if testing:
             dev_loss, results = do_test(model,dev_dataloader,hps)
             analysis = analyse(results)
@@ -64,10 +87,6 @@ def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
             sensitivity = analysis['sensitivity']
             specificity = analysis['specificity']
 
-        else:
-            dev_loss = None
-
-        if testing:
             wandb.log({"avg_loss": avg_loss,
                        "dev_loss": dev_loss,
                     "balanced_accuracy": balanced_accuracy,
@@ -79,9 +98,10 @@ def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
         losses.append(avg_loss)
 
         print(f"epoch {epoch+1:04}/{hps.num_epochs:04}, loss: {avg_loss:.4f}, dev_loss: {dev_loss:.4f}")
-        
+    wandb.finish()
     return losses
 
 def save_checkpoint(model,hps,name='checkpoint'):
     checkpoint = {'model_state_dict': model.state_dict(), 'hps': hps}
     torch.save(checkpoint, f'./checkpoints/{hps.name}_{name}.pth')
+

@@ -1,6 +1,7 @@
 import json
 import torch
 import torch.nn as nn
+import torch.nn.functional
 from hyperparams import HyperParams
     
 import torch
@@ -32,12 +33,8 @@ class LSTMClassifier(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
-        if self.input_dropout:
-            x = self.dropout(x)
+        x = self.dropout(x)
         output, (hidden, cell) = self.lstm(x)
-
-        if cell.dim() == 2:
-            cell = cell.unsqueeze(1)
 
         if self.bidirectional:
             out = torch.cat((cell[-2], cell[-1]), dim=1).reshape(self.batch_size,2 * self.hidden_size)
@@ -66,60 +63,43 @@ class AttentionBlockModel(nn.Module):
         self.block_size = hps.block_size
         self.num_heads = hps.num_heads
 
-        self.attention = nn.MultiheadAttention(hps.input_size, hps.num_heads, batch_first=True)
-        self.final_attention = nn.MultiheadAttention(hps.input_size,hps.num_heads, batch_first=True)
-        self.final_output = nn.Linear(hps.input_size, 2)
-        self.softmax = nn.Softmax(1)
+        self.dropout = nn.Dropout(hps.dropout)
+        self.attention = nn.MultiheadAttention(hps.input_size, hps.num_heads, batch_first=True,dropout=hps.dropout)
+        self.linearmid = nn.Linear(hps.input_size,hps.input_size)
+        self.final_attention = nn.MultiheadAttention(hps.input_size,hps.num_heads, batch_first=True,dropout=hps.dropout)
+        self.linear = nn.Linear(hps.input_size, hps.linear_size)
+        self.relu = nn.ReLU()
+        self.final_output = nn.Linear(hps.linear_size, 2)
+        self.softmax = nn.Softmax(0)
 
     def forward(self, x):
-        if len(x.shape) < 3:
-            x = x.unsqueeze(0)
-
         x = x.to(self.device)  # Move input to the same device as model
+
+       
         B, T, D = x.shape  # Batch, Sequence Length, Feature Dim
-        
-        # # Pad sequence length to be a multiple of block_size
-        # pad_len = (self.block_size - (T % self.block_size)) % self.block_size
-        # if pad_len > 0:
-        #     pad_tensor = torch.zeros((B, pad_len, D), device=x.device)
-        #     x = torch.cat([x, pad_tensor], dim=1)
-        #        x = x[:,:-1,:,:]
         
         # Reshape into blocks
         num_blocks = x.shape[1] // self.block_size
         x = x[:,:num_blocks*self.block_size,:]
-        x = x.reshape(B, num_blocks, self.block_size, -1)
-        
+
+        #remove batch
         x = x.reshape(num_blocks,self.block_size,-1)
+
+        x = self.dropout(x)
         out, _ = self.attention(x, x, x)
         out = torch.mean(out,axis=1)
-        print(out.shape)
-
-        # Apply attention to each block
-        # block_outputs = []
-        # for i in range(num_blocks - 1):
-        #     block = x[:, i, :, :]
-        #     out, _ = self.attention(block, block, block) # B, L, E - B, L, L
-        #     out = torch.mean(out,dim=1).reshape(B,1,-1)
-        #     # weights = torch.mean(weights,dim=1) # B, L
-        #     # out = torch.matmul(weights,out) # computes batched weighted sum
-        #     block_outputs.append(out)
-        
-        # # Concatenate all block scalars
-        # out = torch.cat(block_outputs,axis=1)  # Shape: (B, num_blocks_2, mid_size)
-
-        # Apply second stage attention
         out, _ = self.final_attention(out, out, out) # B, L', E
-        # weights = torch.mean(weights,dim=1) # B, L
-        # out = torch.matmul(weights,out).reshape(B,-1) # computes batched weighted sum
-        out = torch.mean(out,dim=1)
+        out = torch.mean(out,axis=0)
+        out = self.linear(out)
+        out = self.relu(out)
+        out = self.dropout(out)
         out = self.final_output(out)  # Final scalar output shape (B,1)
         out = self.softmax(out)
-        out = out[:,0]
+        out = out[0]
         return out  # Shape: (B,)
     
     def loss_func(self):
         if self.loss_function == 'bce':
             return nn.BCELoss()
         if self.loss_function == 'mse':
-            return nn.MSELoss()
+            return torch.nn.functional.mse_loss

@@ -1,13 +1,17 @@
 from dataclasses import dataclass, asdict
 import json
 import torch
+from datetime import datetime
+
+def timestamp():
+    return datetime.now().strftime("%Y-%m-%d_%H-%M")
 
 @dataclass
 class HyperParams():
     def __init__(self, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
-        self.group = self.name
+        self.group = self.name + '_' + timestamp()
 
     @classmethod
     def load_json(self,path):

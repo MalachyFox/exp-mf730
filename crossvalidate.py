@@ -50,11 +50,11 @@ if __name__ == "__main__":
     results_list = []
     args_list = [(i, k, manifest, hps, name) for i in range(k)]
 
-    if hps.device == 'cuda' or hps.threads < 2:
+    if hps.device == 'cudaa' or hps.threads < 2:
         for arg in args_list:
             results_list.append(crossvalidation_task(arg))
 
-    if hps.device == 'cpu':
+    else:
         # Run crossvalidation
         with Pool(processes=hps.threads) as pool:
             results_list = pool.map(crossvalidation_task, args_list)
