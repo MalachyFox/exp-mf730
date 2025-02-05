@@ -91,7 +91,8 @@ def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
                        "dev_loss": dev_loss,
                     "balanced_accuracy": balanced_accuracy,
                     "sensitivity": sensitivity,
-                    "specificity": specificity
+                    "specificity": specificity,
+                    
                     })
         else:
             wandb.log({"avg_loss":avg_loss})

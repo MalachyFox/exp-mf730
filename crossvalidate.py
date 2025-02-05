@@ -50,7 +50,7 @@ if __name__ == "__main__":
     results_list = []
     args_list = [(i, k, manifest, hps, name) for i in range(k)]
 
-    if hps.device == 'cudaa' or hps.threads < 2:
+    if hps.threads < 2:
         for arg in args_list:
             results_list.append(crossvalidation_task(arg))
 

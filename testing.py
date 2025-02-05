@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from pprint import pprint
 
 def do_test(model,dataloader,hps):
+    model.eval()
     with torch.no_grad():
         results = []
         loss_func = model.loss_func()
