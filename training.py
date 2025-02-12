@@ -13,13 +13,13 @@ from tools.analyse_results import analyse
 from tqdm import tqdm
 
 class CustomLRScheduler(torch.optim.lr_scheduler.LambdaLR):
-    def __init__(self, optimizer, warmup_steps=20, hold_steps=20, decay_steps=20, max_lr=3e-5, final_lr=1e-6):
-        self.warmup_steps = warmup_steps
-        self.hold_steps = hold_steps
-        self.decay_steps = decay_steps
-        self.total_steps = warmup_steps + hold_steps + decay_steps
-        self.max_lr = max_lr
-        self.final_lr = final_lr
+    def __init__(self, optimizer, hps):
+        self.warmup_steps = hps.warmup_steps
+        self.hold_steps = hps.hold_steps
+        self.decay_steps = hps.num_epochs - hps.warmup_steps - hps.hold_steps
+        self.total_steps = hps.num_epochs
+        self.max_lr = hps.lr
+        self.final_lr = hps.lr/100
 
         super().__init__(optimizer, self.lr_lambda)
 
@@ -51,7 +51,7 @@ def do_train(model, train_dataloader, dev_dataloader, hps,testing=True):
     if hps.scheduler == 'StepLR':
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer,step_size=hps.scheduler_step_size,gamma=hps.scheduler_gamma)
     elif hps.scheduler == 'custom':
-        scheduler = CustomLRScheduler(optimizer)
+        scheduler = CustomLRScheduler(optimizer,hps)
 
     loss_function = model.loss_func()
     losses = []

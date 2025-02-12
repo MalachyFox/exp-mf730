@@ -20,7 +20,7 @@ def crossvalidation_task(args):
     i,k,manifest,hps,name = args
     model = load_model(hps).to(hps.device)
     
-    hps.name = f'{name}_{i+1}i_{k}k' # change this probably
+    hps.name = f'{name}_{i+1}i_{k}k'
     
     # Folded dataloader
     train, test = manifest.get_k(i,hps)
@@ -29,9 +29,39 @@ def crossvalidation_task(args):
     losses = do_train(model,train, test, hps)
 
     test_loss, results = do_test(model,test,hps)
-    # Test 
-    return results
 
+    return results
+    
+def main(hps):
+
+    ## Load Manifest ##
+    manifest = Manifest(hps.manifest_path)
+    name = hps.name
+    pprint(hps)
+
+    ## Prepare arguments ##
+    results_list = []
+    args_list = [(i, hps.k_fold, manifest, hps, name) for i in range(hps.k_fold)] * hps.ensemble_size
+    
+    ## Run crossvalidation ##
+    if hps.threads == 1:
+        for arg in args_list:
+            results_list.append(crossvalidation_task(arg))
+    else:
+        with Pool(processes=hps.threads) as pool:
+            results_list.append(pool.map(crossvalidation_task, args_list))
+    
+    ## Collect results ##
+    results = []
+    [results.extend(r) for r in results_list]
+
+    ## Save results ##
+    results_folder = f'./results/{name}'
+    results_path = f'{results_folder}/results.json'
+    os.makedirs(results_folder, exist_ok=True)
+    print(f'Saving results to {results_path}')
+    with open(results_path,'w') as f:
+        json.dump(results,f,indent=4)
 
 if __name__ == "__main__":
     # Parse command-line arguments
@@ -41,32 +71,4 @@ if __name__ == "__main__":
 
     # Load hyperparameters from JSON
     hps = HyperParams.load_json(args.config)
-    manifest = Manifest(hps.manifest_path)
-    k = hps.k_fold
-    name = hps.name
-    
-    pprint(hps)
-
-    results_list = []
-    args_list = [(i, k, manifest, hps, name) for i in range(k)]
-
-    if hps.threads < 2:
-        for arg in args_list:
-            results_list.append(crossvalidation_task(arg))
-
-    else:
-        # Run crossvalidation
-        with Pool(processes=hps.threads) as pool:
-            results_list = pool.map(crossvalidation_task, args_list)
-        
-    results = []
-    [results.extend(r) for r in results_list]
-
-    # Save results
-    results_folder = f'./results/{name}'
-    results_path = f'{results_folder}/results.json'
-    os.makedirs(results_folder, exist_ok=True)
-    print(f'Saving results to {results_path}')
-    with open(results_path,'w') as f:
-        json.dump(results,f,indent=4)
-        
+    main(hps)

@@ -1,7 +1,7 @@
 import torch
 
 # Path to the file
-file_path = 'embeddings/wav2vec2-base_embeddings.pt'
+file_path = 'embeddings/egemaps_embeddings.pt'
 
 # Load the PyTorch file
 data = torch.load(file_path)
@@ -9,6 +9,7 @@ data = torch.load(file_path)
 # Check if the data is a list
 if isinstance(data, list):
     lengths = []
+    print(f'len data: {len(data)}')
 
     # Iterate through the list to extract lengths (L dimension)
     for i, tensor in enumerate(data):

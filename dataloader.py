@@ -9,9 +9,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from tools.create_manifest import get_orthographic_data
 import torch
 from transformers import Wav2Vec2Processor, Wav2Vec2Model
+from transformers import AutoProcessor, WavLMModel
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
-
+import opensmile
 
 class Manifest:
     def __init__(self,manifest_path='/research/milsrg1/sld/exp-mf730/manifest.json'):
@@ -24,6 +25,12 @@ class Manifest:
         self.manifest_path = manifest_path
         self.ids = [m.name for m in self.entries]
 
+        N = len(self.labels)
+        self.indices = np.arange(N)
+        np.random.seed(0)
+        np.random.shuffle(self.indices)
+        
+
     def get_wav2vec2_embeddings(self, model_name = "wav2vec2-base", embeddings_folder = '/research/milsrg1/sld/exp-mf730/embeddings'):
         embedding_file = f'{model_name}_embeddings.pt'
         path = f'{embeddings_folder}/{embedding_file}'
@@ -32,9 +39,15 @@ class Manifest:
             embeddings = torch.load(path)
         else:
             print(f'\ngenerating embeddings for {self.manifest_path} using {model_name} and saving to {embeddings_folder}\n')
-            model_id = f'facebook/{model_name}'
-            processor = Wav2Vec2Processor.from_pretrained(model_id)
-            model = Wav2Vec2Model.from_pretrained(model_id)
+            
+            if model_name == 'wav2vec2-base':
+                model_id = f'facebook/{model_name}'
+                processor = Wav2Vec2Processor.from_pretrained(model_id)
+                model = Wav2Vec2Model.from_pretrained(model_id)
+            elif model_name == 'wavlm-base':
+                processor = AutoProcessor.from_pretrained("patrickvonplaten/wavlm-libri-clean-100h-base-plus")
+                model = WavLMModel.from_pretrained("patrickvonplaten/wavlm-libri-clean-100h-base-plus")
+
 
             embeddings = []
             for entry in self.entries:
@@ -69,17 +82,63 @@ class Manifest:
 
         return embeddings
     
+    def get_egemaps_embeddings(self,model_name,embeddings_folder):
+        embedding_file = f'{model_name}_embeddings.pt'
+        path = f'{embeddings_folder}/{embedding_file}'
+        if os.path.exists(path):
+            print(f'\nLoading embeddings for {self.manifest_path} from {path}\n')
+            embeddings = torch.load(path)
+        
+        else:
+            smile = opensmile.Smile(feature_set=opensmile.FeatureSet.eGeMAPSv02)
+            embeddings = []
+            for entry in self.entries:
+                print(f'\nprocessing entry {entry.name}')
+                embeddings_list = []
+                i = 0
+                sampling_rate = entry.sample_rate
+                for segment in entry.child_segments:
+                    print(f'processing segment {i:04}/{len(entry.child_segments):04}...',end='\r')
+                    i += 1
+
+                    num_samples = len(segment)
+                    window_size = 1024
+                    if num_samples < window_size:
+                        continue
+                        # padding = min_samples - num_samples
+                        # segment = F.pad(segment,(0,padding))
+                    
+                    num_chunks = num_samples // window_size
+                    for start in range(num_chunks):
+                        windowed_segment = segment[start*window_size: (start + 1) * window_size]
+                        features = smile.process_signal(windowed_segment, sampling_rate)
+                        features = torch.tensor(features.to_numpy(),dtype=torch.float32)
+                        features = features.unsqueeze(0)
+                        embeddings_list.append(features)
+
+                if len(embeddings_list) < 2:
+                    print('ERROR: no embeddings')
+                    raise ValueError
+                
+                concatenated_embeddings = torch.cat(embeddings_list,dim = 1)
+                embeddings.append(concatenated_embeddings)
+            torch.save(embeddings,path)
+
+        return embeddings
+    
     def get_embeddings(self,model_name,embeddings_folder = '/research/milsrg1/sld/exp-mf730/embeddings'):
         if model_name == 'wav2vec2-base':
             return self.get_wav2vec2_embeddings(model_name,embeddings_folder)
-
+        elif model_name == 'wavlm-base':
+            return self.get_wav2vec2_embeddings(model_name,embeddings_folder)
+        elif model_name == 'egemaps':
+            return self.get_egemaps_embeddings(model_name, embeddings_folder)
+    
     def get_k(self,i,hps):
         k = hps.k_fold
         print(f'Running cross validation {i+1}/{k}')
         N = len(self.labels)
-        indices = np.arange(N)
-        np.random.seed(0)
-        np.random.shuffle(indices)
+        indices = self.indices
         test_size = N//k
         extra = N % k
         start = i * test_size + min(i, extra)
@@ -97,7 +156,6 @@ class Manifest:
         test_dataloader = DataLoader(test_dataset,batch_size = 1, shuffle = True)
 
         train_labels = [self.labels[index] for index in train_indices]
-        print(f'training label counts: 1: {np.sum([1 for label in train_labels if int(label) == 1])}, 0.5: {np.sum([1 for label in train_labels if float(label) == 0.5])}, 0.0: {np.sum([1 for label in train_labels if float(label) == 0.0])}')
         train_data = [embeddings[index] for index in train_indices]
         train_ids = [self.ids[index] for index in train_indices]
         train_dataset = ListDataset(train_data,train_labels,train_ids)

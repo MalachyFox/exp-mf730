@@ -1,4 +1,5 @@
 #!/bin/bash
-eval "$(conda shell.bash hook)"  # Initialize Conda (needed for non-interactive shells)
-conda activate myenv
+eval "$(conda shell.bash hook)"
+ENV_NAME="myenv"
+conda activate "$ENV_NAME"
 python3 crossvalidate.py "$@"

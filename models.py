@@ -15,7 +15,6 @@ class LSTMClassifier(nn.Module):
         self.batch_size = hps.batch_size
         num_directions = 2 if self.bidirectional else 1
         self.loss_function = hps.loss_function
-        self.input_dropout = hps.input_dropout
 
         self.lstm = nn.LSTM(
             input_size=hps.input_size,
@@ -33,7 +32,9 @@ class LSTMClassifier(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
+
         x = self.dropout(x)
+        
         output, (hidden, cell) = self.lstm(x)
 
         if self.bidirectional:
@@ -52,7 +53,7 @@ class LSTMClassifier(nn.Module):
         if self.loss_function == 'bce':
             return nn.BCELoss()
         if self.loss_function == 'mse':
-            return nn.MSELoss()
+            return torch.nn.functional.mse_loss
 
 
 class AttentionClassTokenModel(nn.Module):
@@ -75,8 +76,6 @@ class AttentionClassTokenModel(nn.Module):
         self.softmax = nn.Softmax(1)
 
     def forward(self, x):
-        x = x.to(self.device)  # Move input to the same device as model
-
        
         B, T, D = x.shape  # Batch, Sequence Length, Feature Dim
         
@@ -135,9 +134,6 @@ class AttentionBlockModel(nn.Module):
         self.softmax = nn.Softmax(0)
 
     def forward(self, x):
-        x = x.to(self.device)  # Move input to the same device as model
-
-       
         B, T, D = x.shape  # Batch, Sequence Length, Feature Dim
         
         # Reshape into blocks
