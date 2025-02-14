@@ -2,7 +2,6 @@ import json
 import soundfile as sf
 import numpy as np
 from dataclasses import dataclass
-from pprint import pprint
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -13,6 +12,16 @@ from transformers import AutoProcessor, WavLMModel
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
 import opensmile
+from multiprocessing import Pool
+from tqdm import tqdm
+
+
+def extract_egemaps_features(args):
+    segment, smile = args
+    features = smile.process_signal(segment,sampling_rate = 16000)
+    features = torch.tensor(features.to_numpy(),dtype=torch.float32)
+    features = features.unsqueeze(0)
+    return features
 
 class Manifest:
     def __init__(self,manifest_path='/research/milsrg1/sld/exp-mf730/manifest.json'):
@@ -82,7 +91,7 @@ class Manifest:
 
         return embeddings
     
-    def get_egemaps_embeddings(self,model_name,embeddings_folder):
+    def get_egemaps_embeddings(self,model_name="egemaps",embeddings_folder = '/research/milsrg1/sld/exp-mf730/embeddings',parallel=True):
         embedding_file = f'{model_name}_embeddings.pt'
         path = f'{embeddings_folder}/{embedding_file}'
         if os.path.exists(path):
@@ -92,29 +101,25 @@ class Manifest:
         else:
             smile = opensmile.Smile(feature_set=opensmile.FeatureSet.eGeMAPSv02)
             embeddings = []
-            for entry in self.entries:
+            for entry in tqdm(self.entries):
                 print(f'\nprocessing entry {entry.name}')
                 embeddings_list = []
                 i = 0
-                sampling_rate = entry.sample_rate
-                for segment in entry.child_segments:
-                    print(f'processing segment {i:04}/{len(entry.child_segments):04}...',end='\r')
-                    i += 1
+                segments = entry.child_segments
+                segments = [s for s in segments if len(s) >= 1024]
 
-                    num_samples = len(segment)
-                    window_size = 1024
-                    if num_samples < window_size:
-                        continue
-                        # padding = min_samples - num_samples
-                        # segment = F.pad(segment,(0,padding))
-                    
-                    num_chunks = num_samples // window_size
-                    for start in range(num_chunks):
-                        windowed_segment = segment[start*window_size: (start + 1) * window_size]
-                        features = smile.process_signal(windowed_segment, sampling_rate)
+                if parallel:
+                    args = [(s,smile) for s in segments]
+                    with Pool(processes=None) as pool:
+                        embeddings_list = pool.map(extract_egemaps_features, args)
+                else:
+                    for segment in entry.child_segments:
+                        print(f'processing segment {i:04}/{len(entry.child_segments):04}...',end='\r')
+                        i += 1
+                        features = smile.process_signal(segment,sampling_rate = entry.sample_rate)
                         features = torch.tensor(features.to_numpy(),dtype=torch.float32)
                         features = features.unsqueeze(0)
-                        embeddings_list.append(features)
+                        embeddings_list.append(extract_egemaps_features(segment,smile))
 
                 if len(embeddings_list) < 2:
                     print('ERROR: no embeddings')
@@ -265,5 +270,5 @@ def load_data(hps):
     return train_dataloader, test_dataloader
 
 if __name__ == "__main__":
-    Manifest().get_wav2vec2_embeddings()
+    Manifest().get_egemaps_embeddings()
     

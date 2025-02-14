@@ -76,7 +76,7 @@ class AttentionClassTokenModel(nn.Module):
         self.softmax = nn.Softmax(1)
 
     def forward(self, x):
-       
+
         B, T, D = x.shape  # Batch, Sequence Length, Feature Dim
         
         # Reshape into blocks
