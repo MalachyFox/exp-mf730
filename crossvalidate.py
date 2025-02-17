@@ -17,7 +17,7 @@ def load_model(hps):
     return model
 
 def crossvalidation_task(args):
-    i,k,manifest,hps,name = args
+    i,k,manifest,hps,name, ensemble_id = args
     model = load_model(hps).to(hps.device)
     
     hps.name = f'{name}_{i+1}i_{k}k'
@@ -30,7 +30,7 @@ def crossvalidation_task(args):
 
     test_loss, results = do_test(model,test,hps)
 
-    return results
+    return results, (ensemble_id,i)
     
 def main(hps):
 
@@ -41,7 +41,9 @@ def main(hps):
 
     ## Prepare arguments ##
     results_list = []
-    args_list = [(i, hps.k_fold, manifest, hps, name) for i in range(hps.k_fold)] * hps.ensemble_size
+    args_list = []
+    for ensemble_id in range(hps.ensemble_size):
+        args_list.extend([(i, hps.k_fold, manifest, hps, name,ensemble_id) for i in range(hps.k_fold)])
     
     ## Run crossvalidation ##
     if hps.threads == 1:
@@ -51,9 +53,16 @@ def main(hps):
         with Pool(processes=hps.threads) as pool:
             results_list.append(pool.map(crossvalidation_task, args_list))
     
-    ## Collect results ##
     results = []
-    [results.extend(r) for r in results_list]
+    for ensemble_id in range(hps.ensemble_size):
+        for i in range(hps.k_fold):
+            for result, loc in results_list:
+                if loc[0] == ensemble_id and loc[1] == i:
+                    results.extend(result)
+            
+    # ## Collect results ##
+    # results = []
+    # [results.extend(r) for r in results_list]
 
     ## Save results ##
     results_folder = f'./results/{name}'
