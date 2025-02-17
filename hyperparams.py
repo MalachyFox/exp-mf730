@@ -12,7 +12,7 @@ class HyperParams():
         for key, value in kwargs.items():
             setattr(self, key, value)
         self.group = self.name + '_' + timestamp()
-
+        self.ensemble_id = 0
     @classmethod
     def load_json(self,path):
         with open(path) as f:

@@ -33,13 +33,7 @@ class Manifest:
         self.labels = [m.diagnosis for m in self.entries]
         self.manifest_path = manifest_path
         self.ids = [m.name for m in self.entries]
-
-        N = len(self.labels)
-        self.indices = np.arange(N)
-        np.random.seed(0)
-        np.random.shuffle(self.indices)
         
-
     def get_wav2vec2_embeddings(self, model_name = "wav2vec2-base", embeddings_folder = '/research/milsrg1/sld/exp-mf730/embeddings'):
         embedding_file = f'{model_name}_embeddings.pt'
         path = f'{embeddings_folder}/{embedding_file}'
@@ -143,7 +137,11 @@ class Manifest:
         k = hps.k_fold
         print(f'Running cross validation {i+1}/{k}')
         N = len(self.labels)
-        indices = self.indices
+
+        indices = np.arange(N)
+        np.random.seed(hps.ensemble_id)
+        np.random.shuffle(indices)
+
         test_size = N//k
         extra = N % k
         start = i * test_size + min(i, extra)

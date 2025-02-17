@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import argparse
 from sklearn.metrics import roc_curve, auc
 
+
+# ensIDX, foldIDX, ID, label, pred 
 def generate_table(results):
     labels = [r[1] for r in results]
     clamped_preds = [r[3] for r in results]
@@ -40,12 +42,13 @@ def analyse_table(table):
                 'balanced_accuracy': balanced_accuracy}
     return analysis
 
-
-
 def clamp(results,threshold):
     output = []
     for r in results:
-        id, label, pred = r
+        if len(r) == 5:
+            ensid, foldid, id, label, pred = r
+        else:
+            id, label, pred = r
         if pred >= threshold:
             clamped = 1.0
         else:
@@ -66,13 +69,16 @@ def analyse_ensemble(results,threshold=0.5):
     analysis = analyse_table(table)
     return analysis
 
-def seperate_results(results,ensemble_num = 5):
-    if len(results) % ensemble_num != 0:
-        raise ValueError
-    size = len(results) // ensemble_num
+def seperate_results(results):
+    ensemble_num = np.max([r[0] for r in results])
+    print(ensemble_num)
     results_list = []
-    for i in range(ensemble_num):
-         results_list.append(results[i*size:(i+1)*size])
+    for ensID in range(ensemble_num):
+         results_sublist = []
+         for r in results:
+              if r[0] == ensID:
+                   results_sublist.append(r)
+         results_list.append(results_sublist)
     return results_list
 
 def analyse_seperated(results,threshold=0.5):
@@ -80,7 +86,6 @@ def analyse_seperated(results,threshold=0.5):
     analysis_list = []
     for results in results_list:
          analysis_list.append(analyse(results,threshold))
-    
     sens = [a['sensitivity'] for a in analysis_list]
     spec = [a['specificity'] for a in analysis_list]
     ba = [a['balanced_accuracy'] for a in analysis_list]
@@ -130,7 +135,6 @@ def ensemble_combine(results):
 def full_analysis(results):
     analysis_sep = analyse_seperated(results,threshold=0.5)
     analysis_ensemble = analyse_ensemble(results,threshold=0.5)
-    analysis = analyse(results)
     final_analysis = {'seperated': analysis_sep,'ensemble':analysis_ensemble}
     return final_analysis
 
@@ -156,7 +160,7 @@ if __name__ == '__main__':
     ## GENERATE SORTED PREDICTIONS FILE ##
     
     results_array = np.array(results)
-    diffs = np.array([abs(float(a[2]) - float(a[1])) for a in results_array])
+    diffs = np.array([abs(float(a[4]) - float(a[3])) for a in results_array])
     sorted_indices = diffs.argsort()
     sorted_predictions = results_array[sorted_indices]
     
@@ -164,9 +168,9 @@ if __name__ == '__main__':
 
     ## GENERATE VIOLIN ##
 
-    c00 = [float(r[2]) for r in results_array if r[1] == '0.0']
-    c05 = [float(r[2]) for r in results_array if r[1] == '0.5']
-    c10 = [float(r[2]) for r in results_array if r[1] == '1.0']
+    c00 = [float(r[4]) for r in results_array if r[3] == '0.0']
+    c05 = [float(r[4]) for r in results_array if r[3] == '0.5']
+    c10 = [float(r[4]) for r in results_array if r[3] == '1.0']
 
     lens = np.array([len(c00),len(c05),len(c10)])
     plt.violinplot([c00,c05,c10],[0,0.5,1],widths=0.5* lens/np.max(lens))
